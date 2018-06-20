@@ -23,7 +23,7 @@
 
 
       <a class="navbar-brand" href="<?php echo base_url(); ?>">
-        <img class="img-responsive" src="<?php echo base_url('assets/images/cp_logo_white.png'); ?>" style="width: 22%; margin: 10px;">
+        <img class="img-responsive" src="<?php echo base_url('assets/images/nr_logo_white.png'); ?>" style="width: 22%; margin: 10px;">
       </a>
 
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

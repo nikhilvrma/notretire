@@ -29,21 +29,21 @@ body {
 }
 
 .sidebar-item{
-  color: #2c3e50;
+  color: #636e72;
   font-size: 14px;
 }
 
 .sidebar-active{
   z-index: 2;
   color: #fff;
-  background-color: #2c3e50 !important;
-  border-color: #2c3e50 !important;
+  background-color: #636e72 !important;
+  border-color: #636e72 !important;
 }
 
 .btn-primary{
   color: #fff;
-  background-color: #2c3e50 !important;
-  border-color: #2c3e50 !important;
+  background-color: #636e72 !important;
+  border-color: #636e72 !important;
 }
 
 a.sidebar-active:hover {
@@ -51,12 +51,12 @@ a.sidebar-active:hover {
  }
 
  .nav-bg{
-   background-color: #2c3e50 !important;
+   background-color: #636e72 !important;
  }
 
  .cardheader{
    color: #fff;
-   background-color: #2c3e50 !important;
+   background-color: #636e72 !important;
  }
 
 
@@ -72,7 +72,7 @@ a.sidebar-active:hover {
  	position: relative;
  	background-color: none;
  	color: #222;
- 	border: 1px solid #2c3e50;
+ 	border: 1px solid #636e72;
  	padding: 2%;
  	width: 90%;
  	text-align: left;
@@ -84,14 +84,14 @@ a.sidebar-active:hover {
  }
 
  .options input[type="radio"]:checked+label {
- 	background: #2c3e50;
+ 	background: #636e72;
  	color: #fff;
  }
 
  .opt {
- 	background-color: #2c3e50;
+ 	background-color: #636e72;
  	padding: 2.2%;
- 	border: 1px solid #2c3e50;
+ 	border: 1px solid #636e72;
  	color: white;
  }
 
