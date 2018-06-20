@@ -23,7 +23,7 @@
 
 
       <a class="navbar-brand" href="<?php echo base_url(); ?>">
-        <img class="img-responsive" src="<?php echo base_url('assets/images/nr_logo_white.png'); ?>" style="width: 22%; margin: 10px;">
+        <img class="img-responsive" src="<?php echo base_url('assets/images/nr_logo_white.png'); ?>" style="width: 20%; margin: 10px;">
       </a>
 
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,7 +160,104 @@
 
         </div>
 
+      </div>
 
+    </div>
+
+
+
+    <div class="container-fluid" style="background-color: white;">
+
+
+      <div class="row">
+
+
+        <div class="col-lg-12 mb-4">
+
+
+
+          <div style="margin-top: 20px;">
+          <center><h2 style="font-family: 'Kaushan Script';">About Not-Retire</h2></center>
+
+          <center>
+            <p>about Not-Retire</p>
+          </center>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="container-fluid" style="background-color: #dfe6e9;">
+
+
+      <div class="row">
+
+
+        <div class="col-lg-12 mb-4">
+
+
+
+          <div style="margin-top: 20px;">
+            <center><h2 style="font-family: 'Kaushan Script'; margin-bottom: 20px;">Our Team</h2></center>
+            <div class="row">
+
+            <div class="col-lg-2 mb-4">
+              <center>
+                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <br><br>
+                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+              </center>
+            </div>
+
+            <div class="col-lg-2 mb-4">
+              <center>
+                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <br><br>
+                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+              </center>
+            </div>
+
+            <div class="col-lg-2 mb-4">
+              <center>
+                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <br><br>
+                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+              </center>
+            </div>
+
+            <div class="col-lg-2 mb-4">
+              <center>
+                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <br><br>
+                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+              </center>
+            </div>
+
+            <div class="col-lg-2 mb-4">
+              <center>
+                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <br><br>
+                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+              </center>
+            </div>
+
+            <div class="col-lg-2 mb-4">
+              <center>
+                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <br><br>
+                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+              </center>
+            </div>
+
+          </div>
+
+          </div>
+
+        </div>
 
       </div>
 

@@ -3,9 +3,5 @@
     <a class="navbar-brand" href="<?php echo base_url(); ?>">
       <img class="img-responsive" src="<?php echo base_url('assets/images/nr_logo_white.png'); ?>" style="width: 14%; margin: 10px;">
     </a>
-
-
-
-
   </div>
 </nav>
