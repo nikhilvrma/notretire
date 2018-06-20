@@ -51,18 +51,6 @@
           <div class="clearfix"></div>
           <p>Comparing Applicants for the Offer: <b><?= $offerTitle?></b></p>
           <hr>
-          <?php if(!empty($candidates['skills'][0])){foreach($candidates['skills'][0] as $key => $value){
-            $skills[0][$value['skillID']]['skillID'] = $value['skillID'];
-            $skills[0][$value['skillID']]['skillName'] = $value['skill_name'];
-            $skills[0][$value['skillID']]['type'] = $value['type'];
-            $skills[0][$value['skillID']]['score'] = $value['score'];
-          }}else{$skills[0] = array();}?>
-          <?php if(!empty($candidates['skills'][1])){foreach($candidates['skills'][1] as $key => $value){
-            $skills[1][$value['skillID']]['skillID'] = $value['skillID'];
-            $skills[1][$value['skillID']]['skillName'] = $value['skill_name'];
-            $skills[1][$value['skillID']]['type'] = $value['type'];
-            $skills[1][$value['skillID']]['score'] = $value['score'];
-          }}else{$skills[1] = array();}?>
           <div class="row">
 
             <div class="col-md-12 mb-4">
@@ -189,49 +177,6 @@
                      }else{echo "<td>Not Found.</td>";}?>
                   </tr>
 
-                  <?php if(!empty($allSkills)){
-                    foreach($allSkills as $allSkill){ if(isset($allSkill['skillName']) && $allSkill['skillName'] != NULL){?>
-                    <th scope="row">Skill:<br><label style="float: right;"><?php echo $allSkill['skillName'];?></label></th>
-
-                    <td><?php
-                            if(!empty($skills[0])){
-                                if(isset($skills[0][$allSkill['skillID']])){
-                                  echo $skills[0][$allSkill['skillID']]['score'];
-                                }else{
-                                  echo "Skill Not Found";
-                                }
-                              }else{
-                                echo "Skill Not Found";
-                              }
-                            if(!empty($skills[0]) && isset($skills[0][$allSkill['skillID']])){
-                              if($skills[0][$allSkill['skillID']]['type'] == 2){?>
-                                <sup style="color: red;"><b>Premium</b></sup>
-                        <?php }} ?>
-                    </td>
-
-                    <td><?php
-                            if(!empty($skills[1])){
-                              if(isset($skills[1][$allSkill['skillID']])){
-                                echo $skills[1][$allSkill['skillID']]['score'];
-                              }else{
-                                echo "Skill Not Found";
-                              }
-                            }else{
-                              echo "Skill Not Found";
-                            }
-                            if(!empty($skills[1]) && isset($skills[1][$allSkill['skillID']])){
-                              if($skills[1][$allSkill['skillID']]['type'] == 2){?>
-                                <sup style="color: red;"><b>Premium</b></sup>
-                    <?php }}?>
-                    </td>
-                  </tr>
-                <?php }}}else{?>
-                  <tr>
-                    <th scope="row">Skill:<br><label style="float: right;">NA</label></th>
-                    <td>NA</td>
-                    <td>NA</td>
-                  </tr>
-                <?php } ?>
 
                   <tr>
                     <th scope="row"></th>
@@ -324,10 +269,9 @@
                 <div class="modal-body">
                     <label><b>Select Remark:</b></label>
                   <select class="form-control remark" name = "remark">
-                    <option value = "1">Skill Requirement(s) Not Met.</option>
-                    <option value = "2">Educational Requirement(s) Not Met.</option>
-                    <option value = "3">Work Experience Requirement(s) not met.</option>
-                    <option value = "4">Other</option>
+                    <option value = "1">Educational Requirement(s) Not Met.</option>
+                    <option value = "2">Work Experience Requirement(s) not met.</option>
+                    <option value = "3">Other</option>
                   </select>
                   <br>
                 <div class = "otherRemark" style ="display:none">

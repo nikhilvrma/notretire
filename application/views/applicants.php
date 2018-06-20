@@ -90,23 +90,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <p class="card-text" style="font-size: 14px;"><b>Skills: </b><br>
-                        <ul style="font-size: 14px;">
-                          <?php $skills = explode(',', $applicant['skillName']);
-                                $skillScore = explode(',', $applicant['score']);
-                                $skillType = explode(',', $applicant['type']);
-                                $i=0;
-                                $k = 0;
-                          if($applicant['skillName'] == Null){
-                            echo "No Skill Found";
-                          }else{
-                          foreach ($skills as $key => $skill) {
-                            if(($skillType[$i] == 2 && $skillScore[$i] >= 10) || $skillType[$i] == 1){ $k++;?>
-                            <li><?= $skill?> <?php if($skillType[$i] == 2){echo '<sup style="color: red;">Premium</sup>';}?></li>
-                          <?php }$i++;} if($k == 0){echo "No Skill Found";}} ?>
-                         <!--<sup style="color: red;">Premium</sup>  -->
-                        </ul>
-                      </p>
+
                     </div>
                     <div class="col-md-6 mb-4">
                       <p class="card-text"><b>Status: </b><label class = "status" id = "status<?= $applicant['userID']?>"><?php if($applicant['status'] == 1){echo "<b>Applied</b>";}else if($applicant['status'] == 2){echo "<b style = 'color:green'>Selected</b>";}else if($applicant['status'] == 3){echo "<b style = 'color:yellow'>Shortlisted</b>";}else{echo "<b style = 'color:red'>Rejected</b>";}?></label></p>
@@ -189,16 +173,7 @@
                 </div>
               </div>
 
-              <div class="col-md-12 control-group form-group">
-                <div class="controls">
-                  <b>Skills</b>
-                  <div style="margin-top: 10px;">
-                    <?php if(!empty($allOfferSkills)){ foreach($allOfferSkills as $offerSkill){ if(isset($offerSkill['skillID'])){?>
-                      <div class="col-sm-12" style="font-size: 14px;"><input type="checkbox" name="skills[]" value = "<?=$offerSkill['skillID']?>" <?php if(isset($appliedFilters['skills']) && $appliedFilters['skills'] != '' && in_array($offerSkill['skillID'] ,$appliedFilters['skills'])){echo "checked";} ?>><label style="margin-left: 5px;"><?= $offerSkill['skill_name']?></label></div>
-                    <?php }}}else{echo "Skill Filter Not Applicable.";}?>
-                  </div>
-                </div>
-              </div>
+
 
               <div class="col-md-12 control-group form-group">
                 <div class="controls">
@@ -252,12 +227,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <p class="card-text" style="font-size: 14px;"><b>Skills: </b><br>
-                        <ul style="font-size: 14px;" class = "skillList">
 
-                         <!--<sup style="color: red;">Premium</sup>  -->
-                        </ul>
-                      </p>
                     </div>
                     <div class="col-md-6 mb-4">
                       <p class="card-text"><b>Status: </b><label class = "status"></label></p>
@@ -307,10 +277,9 @@
       <div class="modal-body">
           <label><b>Select Remark:</b></label>
         <select class="form-control remark" name = "remark">
-          <option value = "1">Skill Requirement(s) Not Met.</option>
-          <option value = "2">Educational Requirement(s) Not Met.</option>
-          <option value = "3">Work Experience Requirement(s) not met.</option>
-          <option value = "4">Other</option>
+          <option value = "1">Educational Requirement(s) Not Met.</option>
+          <option value = "2">Work Experience Requirement(s) not met.</option>
+          <option value = "3">Other</option>
         </select>
         <br>
       <div class = "otherRemark" style ="display:none">
@@ -378,37 +347,6 @@
                 container.find('.status').html('<b>Shortlisted</b>').css('color', 'yellow');
               }else{
                 container.find('.status').html('<b>Rejected</b>').css('color', 'red');
-              }
-              if(res[i].skillName == null){
-                 container.find('.skillList').html('No Skills Found')
-              }else{
-                var skillName = (res[i].skillName).split(',')
-                var skilltype = (res[i].type).split(',')
-                var skillScore = (res[i].score).split(',')
-                var k = 0;
-                if(skilltype[0] == 2 && skillScore[0] >=10){
-                  var skill = '<li>'+ skillName[0] +'</li><sup style="color: red;">Premium</sup>';
-                  k++;
-                }
-                if(skilltype[0] == 1){
-                  var skill = '<li>'+ skillName[0] +'</li>';
-                  k++;
-                }
-
-                for(var j = 1; j < skillName.length; j++){
-                   if(skilltype[j] == 2 && skillScore[j] >=10){
-                  var skill = '<li>'+ skillName[j] +'</li><sup style="color: red;">Premium</sup>';
-                  k++;
-                }
-                if(skilltype[j] == 1){
-                  var skill = '<li>'+ skillName[j] +'</li>';
-                  k++;
-                }
-                }
-                if(k = 0){
-                  skill = "No Skill Found";
-                }
-                container.find('.skillList').html(skill)
               }
               container.find('.buttonContainer').addClass('buttonContainer'+res[i].userID).removeClass('buttonContainer')
               container.find('.shortlistCandidate').attr({id:'shortlistCandidate'+res[i].userID, data:res[i].userID})

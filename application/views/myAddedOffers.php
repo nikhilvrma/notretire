@@ -63,8 +63,7 @@
                         <?php } ?>
                     </div>
                     <div class="col-md-12 mb-4">
-                      <?php $skill = ""; $i = 1; if(!empty($offerSkills[$offer['offerID']]))foreach($offerSkills[$offer['offerID']] as $skills){ if($i == 1){$skill = $skill.$skills['skill_name'];}else{$skill = $skill.', '.$skills['skill_name']; } $i++;}else $skill = "None";?>
-                      <p class="card-text"><b>Skills Required: </b><?= $skill?></p>
+
                     </div>
                   </div>
 
@@ -111,7 +110,6 @@
                       <p class="card-text"><b>Joining Date: </b><span class = "joiningDate"></span></p>
                     </div>
                     <div class="col-md-12 mb-4">
-                      <p class="card-text"><b>Skills Required: </b><span class = "skillsReq"></span></p>
                     </div>
                   </div>
 
@@ -148,7 +146,6 @@
             }
 
             locations = '';
-            skills = '';
             if(res.offerLocations[res.offers[i].offerID]){
             for(var k = 0; k < res.offerLocations[res.offers[i].offerID].length; k++){
               if(k==0){
@@ -160,19 +157,8 @@
              }else{
               locations = 'Work From Home'
             }
-            if(res.offerSkills[res.offers[i].offerID]){
-            for(var k = 0; k < res.offerSkills[res.offers[i].offerID].length; k++){
-              if(k==0){
-                skills = skills + res.offerSkills[res.offers[i].offerID][k].skill_name
-              }else{
-                skills = skills+ ' ' +res.offerSkills[res.offers[i].offerID][k].skill_name
-              }
-            }
-             }else{
-            skills = 'None'
-          }
+
             container.find('.offerLocation').html(locations)
-            container.find('.skillsReq').html(skills)
             container.find('.offerType').html(offerType)
             date = new Date(res.offers[i].applicationDeadline)
             month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

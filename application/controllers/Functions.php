@@ -5,7 +5,7 @@ class Functions extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->library(array('session', 'function_lib', 'skill_lib'));
+		$this->load->library(array('session', 'function_lib'));
 		$this->load->helper(array('url'));
 		$this->data = array();
 
@@ -1033,7 +1033,6 @@ class Functions extends CI_Controller {
 		$partTime = '';
 		$duration = '';
 		$applicantType = '';
-		$selectedSkills = '';
 
 		if($x = $this->input->post('offerType')){
 			$offerType = $x;
@@ -1080,9 +1079,7 @@ class Functions extends CI_Controller {
 		if($x = $this->input->post('applicantType')){
 			$applicantType = $x;
 		}
-		if($x = $this->input->post('selectedSkills')){
-			$selectedSkills = $x;
-		}
+
 		$redirect = array(
 			'offerType' => $offerType,
 			'offerDescription'=> $offerDescription,
@@ -1097,8 +1094,7 @@ class Functions extends CI_Controller {
 			'workHome' => $workHome,
 			'location'=> $selectedLocations,
 			'duration' => $duration,
-			'applicantType' => $applicantType,
-			'selectedSkills' => $selectedSkills
+			'applicantType' => $applicantType
 		);
 		// var_dump($redirect); die;
 		$_SESSION['redirect'] = $redirect;
@@ -1246,15 +1242,6 @@ class Functions extends CI_Controller {
 				}
 			}
 
-			if($applicantType == 2){
-				if($selectedSkills == '[null]' || $selectedSkills == ''){
-					$this->session->set_flashdata('message', array('content'=>'Incomplete Data. Please Try Again.','color'=>'red'));
-					if(isset($_POST['edit'])){
-						redirect(base_url('edit-offer/'.$_POST['edit']));
-					}
-					redirect(base_url('add-new-offer'));
-				}
-			}
 
 			if($offerType == '' || $offerTitle == '' || $offerDescription == '' || $openings == '' || $joiningDate == '' || $applicationDeadline == ''){
 				$this->session->set_flashdata('message', array('content'=>'Incomplete Data. Please Try Again.','color'=>'red'));
@@ -1273,26 +1260,11 @@ class Functions extends CI_Controller {
 					$data['applicationDeadline'] = $applicationDeadline;
 					$data['workFromHome'] = $workHome;
 					$data['addedBy'] = $_SESSION['user_data']['userID'];
-					$data['skillRequired'] = $applicantType;
 
 				if(!isset($_POST['edit'])){
 				$result = $this->function_lib->addOffer($data);
 				if($result){
 					$offerID = $this->function_lib->getCurrentOfferID($_SESSION['user_data']['userID']);
-					if($applicantType == 2){
-						$skills = json_decode($selectedSkills);
-						$i = 0;
-						foreach ($skills as $key => $value) {
-							if($value == NULL)
-								continue;
-							$dat[$i]['offerID'] = $offerID;
-							$dat[$i]['skillID'] = $value->skillID;
-							$i++;
-						}
-						$result1 = $this->function_lib->addOfferSkills($dat);
-					}else{
-						$result1 = true;
-					}
 					if($workHome == 2){
 						$locations = json_decode($selectedLocations);
 						// var_dump($locations);
@@ -1308,7 +1280,7 @@ class Functions extends CI_Controller {
 					}else{
 						$result2 = true;
 					}
-					if($result1 && $result2){
+					if($result2){
 						unset($_SESSION['redirect']);
 						$this->session->set_flashdata('message', array('content'=>'Offer added Successfully. Offer Will be approved By CampusPuppy team within 24 hrs.','color'=>'green'));
 						if(isset($_POST['edit'])){
@@ -1332,24 +1304,7 @@ class Functions extends CI_Controller {
 			}else{
 					$result = $this->function_lib->updateOffer($_POST['edit'], $data);
 				if($result){
-					 $this->function_lib->deleteSkillsLocations($_POST['edit']);
 					 $offerID = $_POST['edit'];
-					if($applicantType == 2){
-						$skills = json_decode($selectedSkills);
-						var_dump($selectedSkills);
-						// var_dump($skills);die;
-						$i = 0;
-						foreach ($skills as $key => $value) {
-							if($value == NULL)
-								continue;
-							$dat[$i]['offerID'] = $offerID;
-							$dat[$i]['skillID'] = $value->skillID;
-							$i++;
-						}
-						$result1 = $this->function_lib->addOfferSkills($dat);
-					}else{
-						$result1 = true;
-					}
 					if($workHome == 2){
 						$locations = json_decode($selectedLocations);
 						// var_dump($locations);
@@ -1365,7 +1320,7 @@ class Functions extends CI_Controller {
 					}else{
 						$result2 = true;
 					}
-					if($result1 && $result2){
+					if($result2){
 						unset($_SESSION['redirect']);
 						$this->session->set_flashdata('message', array('content'=>'Offer Edited Successfully. Offer Will be approved By CampusPuppy team within 24 hrs.','color'=>'green'));
 						if(isset($_POST['edit'])){
@@ -1438,11 +1393,6 @@ class Functions extends CI_Controller {
 		$offers = $data['offers'];
 		if(!empty($offers)){
 			foreach ($offers as $key => $offer) {
-				if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID']))
-					$data['offerSkills'][$offer['offerID']] = $offerSkills;
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
 				if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID']))
 					$data['offerLocations'][$offer['offerID']] = $offerLocations;
 				else{
@@ -1463,11 +1413,6 @@ class Functions extends CI_Controller {
 		$offers = $data['offers'];
 		if(!empty($offers)){
 			foreach ($offers as $key => $offer) {
-				if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID']))
-					$data['offerSkills'][$offer['offerID']] = $offerSkills;
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
 				if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID']))
 					$data['offerLocations'][$offer['offerID']] = $offerLocations;
 				else{
@@ -1491,11 +1436,6 @@ class Functions extends CI_Controller {
 		// var_dump($offers);die;
 		if(!empty($offers)){
 			foreach ($offers as $key => $offer) {
-				if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID']))
-					$data['offerSkills'][$offer['offerID']] = $offerSkills;
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
 				if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID']))
 					$data['offerLocations'][$offer['offerID']] = $offerLocations;
 				else{
@@ -1521,11 +1461,6 @@ class Functions extends CI_Controller {
 		$offers = $data['offers'];
 		if(!empty($offers)){
 			foreach ($offers as $key => $offer) {
-				if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID']))
-					$data['offerSkills'][$offer['offerID']] = $offerSkills;
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
 				if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID']))
 					$data['offerLocations'][$offer['offerID']] = $offerLocations;
 				else{

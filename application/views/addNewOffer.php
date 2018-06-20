@@ -61,17 +61,6 @@
                 </div>
               </div>
 
-              <div class="col-md-5 control-group form-group">
-                <div class="controls">
-                  <label><b>Type of Applicants:</b></label>
-                  <select class="form-control" name="applicantType" id="applicantType" required>
-                    <option value="1" <?php if(isset($redirect) && $redirect['applicantType'] == 1){ echo "selected";}?>>Anyone can Apply</option>
-                    <option value="2" <?php if(isset($redirect) && $redirect['applicantType'] == 2){ echo "selected";}?>>Applicants with specific Skills</option>
-                  </select>
-                  <p class="help-block"></p>
-                </div>
-              </div>
-
               <div class="col-md-12 control-group form-group">
                 <div class="controls">
                   <label><b>Offer Title:</b></label>
@@ -227,58 +216,6 @@
               </div>
               </div>
 
-
-
-
-              <div class="col-md-12 selectSkills" <?php if(isset($redirect) && $redirect['applicantType'] == 2){ }else{ echo 'style ="display: none"';}?>>
-                <label><b>Skills:</b></label>
-                <div class="row">
-                  <div class="col-10 col-sm-10">
-                    <select id="skills" class="form-control">
-                      <?php foreach ($skills as $key => $value) { ?>
-                        <option value="<?php echo $value['skill_name']; ?>" skill-id="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>
-                      <?php } ?>
-                    </select>
-                  </div>
-                  <div class="col-2 col-sm-2">
-                    <a href="javascript:" class="addSkill btn btn-primary" style="color: white; width: 100%;">Add Skill</a>
-                  </div>
-                </div>
-
-              </div>
-             <?php if(isset($edit) && $edit == 1){?>
-              <div class="col-md-12 selectedSkills" <?php if(isset($redirect) && $redirect['applicantType'] == 2){ }else{ echo 'style ="display: none"';}?>>
-                <br>
-                <label><b>Selected Skills:</b></label>
-                <div class="row">
-                  <div class="col-12 col-sm-12">
-                    <input type="hidden" name="selectedSkills" value = '<?php if(isset($redirect['selectedSkills']) && !empty($redirect['selectedSkills'])){echo $redirect['selectedSkills'];}?>' >
-                  </div>
-
-                </div>
-               <?php $i = 0;
-               if(isset($redirect['selectedSkills']) && !empty($redirect['selectedSkills'])){
-                foreach(json_decode($redirect['selectedSkills']) as $skill){ ?>
-                  <p class="skill"><?= $skill->skill_name?><a href="javascript:" data-skill="<?= $skill->skill_name?>" index="<?= $i?>" skill-id="<?= $skill->skillID?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
-                <?php $i++; } }?>
-              </div>
-              <?php }else{?>
-                  <div class="col-md-12 selectedSkills" <?php if(isset($redirect) && $redirect['applicantType'] == 2){ }else{ echo 'style ="display: none"';}?>>
-                  <br>
-                  <label><b>Selected Skills:</b></label>
-                  <div class="row">
-                    <div class="col-12 col-sm-12">
-                      <input type="hidden" name="selectedSkills" value = '<?php if(isset($redirect['selectedSkills']) && !empty($redirect['selectedSkills'])){echo $redirect['selectedSkills'];}?>' >
-                    </div>
-
-                  </div>
-                 <?php $i = 0;
-                 if(isset($redirect['selectedSkills']) && !empty($redirect['selectedSkills'])){
-                  foreach(json_decode($redirect['selectedSkills']) as $skill){ ?>
-                    <p class="skill"><?= $skill->skill_name?><a href="javascript:" data-skill="<?= $skill->skill_name?>" index="<?= $i?>" skill-id="<?= $skill->skillID?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
-                  <?php $i++; } }?>
-              <?php } ?>
-            </div>
              <?php if(isset($edit) && $edit == 1){?>
              <input type = "hidden" name = "edit" value = "<?= $redirect['offerID']?>">
              <?php } ?>
@@ -316,61 +253,6 @@
         editor = CKEDITOR.replace('offerDescription');
       });
     </script>
-
-
-    <script>
-
-    <?php if(!empty($redirect['selectedSkills'])){?>
-      var skills_arr =[]
-      var selectedSkills = '<?= $redirect['selectedSkills']?>';
-      selectedSkills = JSON.parse(selectedSkills)
-    <?php }else{?>
-      var skills_arr =[]
-      var selectedSkills = [];
-    <?php }?>
-
-
-  	$(document).on('click','.addSkill',function(){
-  	  var skill ={}
-  	  skill.skill_name = $('#skills').find(":selected").val();
-  	  skill.skillID = $('#skills').find(":selected").attr('skill-id');
-  		console.log(skill);
-  		// console.log(selectedSkills)
-  	  if(!isAlreadyPresentSkill(skill.skillID)){
-  	    var html='<p class="skill">'+skill.skill_name+
-  			' <a href="javascript:" data-skill="'+skill.skill_name+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
-  	    selectedSkills.push(skill);
-  	    $('.selectedSkills').append(html);
-  	  }
-  	  $("input[name=\"selectedSkills\"]").val(JSON.stringify(selectedSkills));
-  	    // console.log(selectedSkills)
-  	});
-
-  	    function isAlreadyPresentSkill(id){
-  	        if(selectedSkills.length == 0)
-  	            return false
-  	        var alreadyPresent = false
-  					console.log(selectedSkills);
-  	        selectedSkills.forEach(function(value){
-  	            if(value.skillID == id)
-  	                alreadyPresent =true
-  	        })
-  	        return alreadyPresent
-  	    }
-  	$(document).on('click','.skill a',function(){
-  	  var skill = $(this).attr('data-skill');
-  	 	var parent = $(this).parent();
-
-  	  if(selectedSkills.length > 0)
-  	  {
-  	    delete selectedSkills[$(this).attr('index')]
-  	    console.log();
-  	    $(this).parent().remove();
-  	  }
-  	  $("input[name=\"selectedSkills\"]").val(JSON.stringify(selectedSkills));
-  	});
-
-  	</script>
 
     <script>
 
@@ -451,17 +333,6 @@
           }
         });
 
-
-        $('#applicantType').on('change', function(){
-          value = $(this).val();
-          if(value == 1){
-            $('.selectSkills').hide();
-            $('.selectedSkills').hide();
-          }else if(value == 2){
-            $('.selectSkills').show();
-            $('.selectedSkills').show();
-          }
-        });
 
         $('#compensationType').on('change', function(){
           value = $(this).val();

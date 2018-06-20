@@ -88,14 +88,7 @@
                       <?= $offerDetails[0]['offerDescription']?>
                     </p>
 
-                    <p>
-                    <b>Skill(s) Required</b><br>
-                      <ul>
-                        <?php if(!empty($offerSkills))foreach($offerSkills as $skills){ ?>
-                        <li><?= $skills['skill_name']?></li>
-                        <?php }else echo "No Skills Required"; ?>
-                      </ul>
-                    </p>
+
 
                     <p>
                     <b>Location(s)</b><br>
@@ -202,10 +195,7 @@
                  <li>Senior Secondary (or equivalent) Educational Details. <?php if($userData['education'][2]){?><i class="fa fa-check" aria-hidden="true" style="color: green;"></i><?php }else{?><i class="fa fa-times" aria-hidden="true" style="color: red;"></i><i style="font-size: 14px;"><a href = "<?= base_url('educational-details')?>">Add Education to Profile Now</a></i><?php } ?></li>
 
                  <li>Graduation Educational Details. <?php if($userData['education'][3]){?><i class="fa fa-check" aria-hidden="true" style="color: green;"></i><?php }else{?><i class="fa fa-times" aria-hidden="true" style="color: red;"></i><i style="font-size: 14px;"><a href = "<?= base_url('educational-details')?>">Add Education to Profile Now</a></i><?php } ?></li>
-                 <?php if(!empty($offerSkills)){
-                  foreach($offerSkills as $offerSkill){?>
-                    <li>Skill: <b><?= $offerSkill['skill_name']?></b>. <?php if(!$offerSkill['user']){?><i class="fa fa-times" aria-hidden="true" style="color: red;"></i><?php }else{?><i class="fa fa-check" aria-hidden="true" style="color: green;"></i><i style="font-size: 14px;"><a>Add Skill to Profile Now</a></i><?php } ?></li>
-                  <?php } }?>
+
                </ol>
              </p>
           </div>
@@ -224,16 +214,11 @@
     <script src="<?= base_url('assets/ckeditor/ckeditor.js')?>"></script>
     <script type="text/javascript">
       education = '<?php if(isset($userData['education'])){ echo json_encode($userData['education']);}else{echo "null";}?>'
-      skills = '<?= json_encode($offerSkills)?>'
-      allSkillSatisfied = '<?= json_encode($allSkillSatisfied)?>'
       education = JSON.parse(education)
-      skills = JSON.parse(skills)
       $(document).ready(function(){
         $('body').on('click','.applyNow', function(){
           if(!education[1] || !education[2] || !education[3]){
            $('#myModal').modal('show');
-          }else if(!allSkillSatisfied){
-            $('#myModal').modal('show');
           }else{
             window.location.href = '<?= base_url('functions/apply/'.$offerDetails[0]['offerID'])?>'
           }

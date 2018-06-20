@@ -5,7 +5,7 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->library(array('session', 'function_lib', 'skill_lib'));
+		$this->load->library(array('session', 'function_lib'));
 		$this->load->helper(array('url'));
 		$this->data = array();
 
@@ -112,101 +112,10 @@ class Home extends CI_Controller {
 	}
 
 
-	public function skills(){
-		if($_SESSION['user_data']['accountType'] == 2){redirect(base_url());}
-		if($this->function_lib->auth()){
-			if($_SESSION['user_data']['emailVerified'] == '1' && $_SESSION['user_data']['mobileVerified'] == '1'){
-				$this->data['pageTitle'] = "Skills";
-				$this->data['activePage'] = "3";
-				if(!empty($x = $this->skill_lib->getPremiumSkills($_SESSION['user_data']['userID'])))
-					$this->data['premiumSkills'] = $x;
-				else
-					$this->data['premiumSkills'] = null;
-				if(!empty($x = $this->skill_lib->getOtherSkills($_SESSION['user_data']['userID'])))
-					$this->data['otherSkills'] = $x;
-				else
-					$this->data['otherSkills'] = null;
-				// var_dump($x);die;
-				if(!empty($x = $this->skill_lib->getNotAddedSkills($_SESSION['user_data']['userID'])))
-					$this->data['skills'] = $x;
-				else
-					$this->data['skills'] = null;
-				// var_dump($x);die;
-				$this->data['sidebar'] =  $this->load->view('commonCode/sidebar',$this->data,true);
-				$this->load->view('skills', $this->data);
-			}
-			else{
-				redirect(base_url('verify-contact-details'));
-			}
-		}
-		else{
-			redirect(base_url());
-		}
-	}
 
-	public function skillTest(){
-		if($this->function_lib->skillAdded($_SESSION['user_data']['userID'], $_SESSION['userData']['currentSkill'])){
-			$this->session->set_flashdata('message', array('content'=>'This Skill has already been added to your profile.','color'=>'red'));
-			redirect(base_url('skills'));
-		}
-		if($_SESSION['user_data']['accountType'] == 2){redirect(base_url());}
-		if($this->function_lib->auth()){
-			if($_SESSION['user_data']['emailVerified'] == '1' && $_SESSION['user_data']['mobileVerified'] == '1'){
-				if($_SESSION['userData']['intest']){
-				// if(false){
-					$_SESSION['questionData'] = NULL;
-					$skill_id = $_SESSION['userData']['currentSkill'];
-					$_SESSION['userData']['currentSkill'] = NULL;
-					$_SESSION['userData']['currentSkillName'] = NULL;
-					$_SESSION['userData'][$skill_id]['totalScore'] = NULL;
-					$_SESSION['userData'][$skill_id]['skips'] = NULL;
-					$_SESSION['userData'][$skill_id]['skipStatus'] = NULL;
-					$_SESSION['userData'][$skill_id]['totalTime'] = NULL;
-					$_SESSION['userData'][$skill_id]['responses'] = NULL;
-					$_SESSION['userData']['intest'] = false;
-					$this->session->set_flashdata('message', array('content'=>'Page Reload Not allowed During test.','color'=>'red'));
-					redirect(base_url('skills'));
-				}
-				$_SESSION['userData']['intest'] = true;
-				$this->data['skillData']['skillID'] = $_SESSION['userData']['currentSkill'];
-				$this->data['skillData']['skillName'] = $_SESSION['userData']['currentSkillName'];
-				$this->data['questionData'] = $_SESSION['questionData'];
-				$totalTime = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['totalTime'];
-				$this->data['totalTime'] = $totalTime;
-				$this->data['skips'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['skips'];
-				$this->data['pageTitle'] = "Skill Test";
-				$this->data['activePage'] = "3";
-				$this->data['sidebar'] =  $this->load->view('commonCode/sidebar',$this->data,true);
-				$this->load->view('skillTest', $this->data);
-			}
-			else{
-				redirect(base_url('verify-contact-details'));
-			}
-		}
-		else{
-			redirect(base_url());
-		}
-	}
 
-	public function skillTestGuidelines(){
-		if($_SESSION['user_data']['accountType'] == 2){redirect(base_url());}
-		if($this->function_lib->auth()){
-			if($_SESSION['user_data']['emailVerified'] == '1' && $_SESSION['user_data']['mobileVerified'] == '1'){
-				$this->data['pageTitle'] = "Skill Test Guidelines";
-				$this->data['activePage'] = "3";
-				$this->data['skill'] = $_SESSION['userData']['currentSkill'];
-				$this->data['settings'] = $this->skill_lib->getTestSettings($_SESSION['userData']['currentSkill'])[0];
-				$this->data['sidebar'] =  $this->load->view('commonCode/sidebar',$this->data,true);
-				$this->load->view('skillTestGuidelines', $this->data);
-			}
-			else{
-				redirect(base_url('verify-contact-details'));
-			}
-		}
-		else{
-			redirect(base_url());
-		}
-	}
+
+
 
 	public function educationalDetails(){
 		if($_SESSION['user_data']['accountType'] == 2){redirect(base_url());}
@@ -297,7 +206,6 @@ class Home extends CI_Controller {
 				$this->data['pageTitle'] = "Add New Offer";
 				$this->data['activePage'] = "9";
 				$this->data['sidebar'] =  $this->load->view('commonCode/sidebar',$this->data,true);
-				$this->data['skills'] = $this->function_lib->getSkills();
 				$this->data['locations'] = $this->function_lib->getAllLocations();
 				if(isset($_SESSION['redirect']))
 					$this->data['redirect'] = $_SESSION['redirect'];
@@ -321,7 +229,6 @@ class Home extends CI_Controller {
 				$this->data['pageTitle'] = "Edit Offer";
 				$this->data['activePage'] = "9";
 				$this->data['sidebar'] =  $this->load->view('commonCode/sidebar',$this->data,true);
-				$this->data['skills'] = $this->function_lib->getSkills();
 				$this->data['locations'] = $this->function_lib->getAllLocations();
 				if(!empty($this->function_lib->getOfferDetails($offerID))){
 					$this->data['redirect'] = $this->function_lib->getOfferDetails($offerID)[0];
@@ -337,12 +244,6 @@ class Home extends CI_Controller {
 						$this->data['redirect']['compensationType'] = 3;
 					}
 					$this->data['redirect']['workHome'] = $this->data['redirect']['workFromHome'];
-					$this->data['redirect']['applicantType'] = $this->data['redirect']['skillRequired'];
-					if($offerSkills = $this->function_lib->getOfferSkills($offerID))
-						$this->data['redirect']['selectedSkills'] = json_encode($offerSkills);
-					else
-						$this->data['redirect']['selectedSkills'] = array();
-
 					if($offerLocations = $this->function_lib->getOfferLocations($offerID)){
 						$i=0;
 						foreach ($offerLocations as $key => $locations) {
@@ -385,14 +286,6 @@ class Home extends CI_Controller {
 				$this->data['offers'] = $offers;
 				if(!empty($offers)){
 				foreach ($offers as $key => $offer) {
-					if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
-						$this->data['offerSkills'][$offer['offerID']] = $offerSkills;
-
-					}
-					else{
-						$this->data['offerSkills'][$offer['offerID']] = array();
-					}
-
 					if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID'])){
 						$this->data['offerLocations'][$offer['offerID']] = $offerLocations;
 
@@ -441,7 +334,6 @@ class Home extends CI_Controller {
 				$_SESSION['currentOffer']['offerID']= $offerID;
 				$this->data['offerTitle'] = $this->function_lib->getOfferDetails($offerID)[0]['offerTitle'];
 				$this->data['allOfferLocations'] = $this->function_lib->getAllApplicantOfferLocations($offerID);
-				$this->data['allOfferSkills'] = $this->function_lib->getAllApplicantOfferSkills($offerID);
 				$this->data['colleges'] = $this->function_lib->getAllApplicantColleges($offerID);
 				$this->data['courses'] = $this->function_lib->getAllApplicantCourses($offerID);
 
@@ -458,25 +350,6 @@ class Home extends CI_Controller {
 					}
 				}else{
 					$this->data['applicants'] = $this->function_lib->getOfferApplicants($offerID, 0, 10, 1);
-					$userSkills = $this->function_lib->getOfferApplicantSkills($offerID, 0, 10, 1);
-					$applicants = array_column($userSkills, 'applicantID');
-					$_SESSION['skillOffset'] = count($applicants);
-					$i = 0;
-					foreach ($this->data['applicants'] as $key => $value) {
-							$x = array_search($value['applicantID'], $applicants);
-						if(is_int($x)){
-							$this->data['applicants'][$i]['skillID'] = $userSkills[$x]['skillID'];
-							$this->data['applicants'][$i]['type'] = $userSkills[$x]['type'];
-							$this->data['applicants'][$i]['score'] = $userSkills[$x]['score'];
-							$this->data['applicants'][$i]['skillName'] = $userSkills[$x]['skillName'];
-						}else{
-							$this->data['applicants'][$i]['skillID'] = NULL;
-							$this->data['applicants'][$i]['type'] = NULL;
-							$this->data['applicants'][$i]['score'] = NULL;
-							$this->data['applicants'][$i]['skillName'] = NULL;
-						}
-						$i++;
-					}
 					$this->data['hasMore'] = $this->function_lib->hasMoreOfferApplicants($offerID, 10, 10, 1);
 					$this->data['type'] = 1;
 				}
@@ -512,8 +385,6 @@ class Home extends CI_Controller {
 				$this->data['candidates']['userDetails'][0] = $this->function_lib->getUserGeneralData($_SESSION['compare'][0]);
 				$this->data['candidates']['educationalDetails'][0] = $this->function_lib->getUserEducationalDetails($_SESSION['compare'][0]);
 				$this->data['candidates']['status'][0] = $this->function_lib->getCurrentApplicantStatus($_SESSION['compare'][0])[0]['status'];
-				$skills[0] = $this->skill_lib->getUserSkills($_SESSION['compare'][0]);
-				$this->data['candidates']['skills'][0] = $skills[0];
 				}else{
 					$this->data['candidates'][0] = null;
 				}
@@ -521,55 +392,9 @@ class Home extends CI_Controller {
 				$this->data['candidates']['userDetails'][1] = $this->function_lib->getUserGeneralData($_SESSION['compare'][1]);
 				$this->data['candidates']['educationalDetails'][1] = $this->function_lib->getUserEducationalDetails($_SESSION['compare'][1]);
 				$this->data['candidates']['status'][1] = $this->function_lib->getCurrentApplicantStatus($_SESSION['compare'][1])[0]['status'];
-				$skills[1] = $this->skill_lib->getUserSkills($_SESSION['compare'][1]);
-				$this->data['candidates']['skills'][1] = $skills[1];
 				}else{
 					$this->data['candidates'][1] = null;
 				}
-				$allSkills = array();
-				if(!empty($skills[0]) && !empty($skills[1])){
-					$candidate[0] = array_column($skills[0] ,'skillID');
-					$candidate[1] = array_column($skills[1] ,'skillID');
-					$skill_name[0] = array_column($skills[0], 'skill_name');
-					$skill_name[1] = array_column($skills[1], 'skill_name');
-					$allSkillsID = array_unique(array_merge($candidate[1], $candidate[0]));
-					$allSkillName = array_unique(array_merge($skill_name[1], $skill_name[0]));
-					$i = 0;
-					foreach ($allSkillsID as $key => $value) {
-						$allSkills[$i]['skillID'] = $value;
-						$i++;
-					}
-					$i = 0;
-					foreach ($allSkillName as $key => $value) {
-							$allSkills[$i]['skillName'] = $value;
-							$i++;
-					}
-				}else if(empty($skills[1])){
-					$i = 0;
-					foreach ($skills[0] as $key => $value) {
-						$allSkills[$i]['skillName'] = $value['skill_name'];
-						$allSkills[$i]['skillID'] = $value['skillID'];
-						$i++;
-					}
-				}else if(empty($skills[0])){
-					$i = 0;
-					foreach ($skills[1] as $key => $value) {
-						$allSkills[$i]['skillName'] = $value['skill_name'];
-						$allSkills[$i]['skillID'] = $value['skillID'];
-						$i++;
-					}
-				}else{
-					$allSkills = array();
-				}
-				// var_dump($allSkills);
-				// foreach ($allSkills as $key => $value) {
-				// 	var_dump($value['skillID']);
-				// 	echo "<br>";
-				// 	var_dump($value['skillName']);
-				// 	echo "<br>";
-				// }
-				// die;
-				$this->data['allSkills'] = $allSkills;
 				$this->data['sidebar'] =  $this->load->view('commonCode/sidebar',$this->data,true);
 				$this->load->view('compareApplicants', $this->data);
 			}
@@ -595,7 +420,6 @@ class Home extends CI_Controller {
 					$this->data['offers'] = $_SESSION['data']['offers'];
 					$this->data['hasMore'] = $_SESSION['data']['hasMore'];
 					if(!empty($_SESSION['data']['offers'])){
-						$this->data['offerSkills'] = $_SESSION['data']['offerSkills'];
 						$this->data['offerLocations'] = $_SESSION['data']['offerLocations'];
 					}
 					$this->data['status'] = $_SESSION['data']['status'];
@@ -608,12 +432,6 @@ class Home extends CI_Controller {
 				$this->data['offers'] = $offers;
 				if(!empty($offers)){
 				foreach ($offers as $key => $offer) {
-					if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
-						$this->data['offerSkills'][$offer['offerID']] = $offerSkills;
-					}
-					else{
-						$this->data['offerSkills'][$offer['offerID']] = array();
-					}
 					if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID'])){
 						$this->data['offerLocations'][$offer['offerID']] = $offerLocations;
 					}
@@ -645,14 +463,11 @@ class Home extends CI_Controller {
 					$this->data['offers'] = $_SESSION['data']['offers'];
 					$this->data['hasMore'] = $_SESSION['data']['hasMore'];
 					if(!empty($_SESSION['data']['offers'])){
-						$this->data['offerSkills'] = $_SESSION['data']['offerSkills'];
 						$this->data['offerLocations'] = $_SESSION['data']['offerLocations'];
 					}
 					$this->data['allOfferLocations'] = $this->function_lib->getAllOfferLocations();
-					$this->data['allOfferSkills'] = $this->function_lib->getAllOfferSkills();
 					if(isset($_SESSION['data']['status'])){
 						$this->data['status'] = $_SESSION['data']['status'];
-						$this->data['userSkills'] = $_SESSION['data']['userSkills'];
 					}
 					if(isset($_SESSION['appliedFilters'])){
 						$this->data['appliedFilters'] = $_SESSION['appliedFilters'];
@@ -665,15 +480,8 @@ class Home extends CI_Controller {
 				$this->data['hasMore'] = $this->function_lib->hasMoreUserOffers(10,10);
 				$this->data['offers'] = $offers;
 				$this->data['allOfferLocations'] = $this->function_lib->getAllOfferLocations();
-				$this->data['allOfferSkills'] = $this->function_lib->getAllOfferSkills();
 				if(!empty($offers)){
 				foreach ($offers as $key => $offer) {
-					if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
-						$this->data['offerSkills'][$offer['offerID']] = $offerSkills;
-					}
-					else{
-						$this->data['offerSkills'][$offer['offerID']] = array();
-					}
 					if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID'])){
 						$this->data['offerLocations'][$offer['offerID']] = $offerLocations;
 					}
@@ -712,7 +520,6 @@ class Home extends CI_Controller {
 		}
 		if(isset($_SESSION['user_data']['accountType']) && $_SESSION['user_data']['accountType'] == 1){
 			$userEducations = $this->function_lib->getUserEducationalDetails($_SESSION['user_data']['userID']);
-			$userSkills = $this->skill_lib->getUserSkills($_SESSION['user_data']['userID']);
 			// var_dump($userEducations);die;
 			$this->data['userData']['education'][1] = false;
 			$this->data['userData']['education'][2] = false;
@@ -739,36 +546,8 @@ class Home extends CI_Controller {
 					}
 				}
 			}
-			if(empty($userSkills)){
-				$this->data['userData']['skills'] = array();
-			}else{
-				$this->data['userData']['skills'] = array_column($userSkills, 'skillID');
-			}
 		}
-		$offerSkills = $this->function_lib->getOfferSkills($offerID);
-		if(!empty($userSkills)){
-			$userSkills = array_column($userSkills, 'skillID');
-		}else{
-			$userSkills = array();
-		}
-		if(!empty($offerSkills)){
-			foreach ($offerSkills as $key => $value) {
-				if(in_array($value['skillID'], $userSkills)){
-					$offerSkills[$key]['user'] = true;
-					if(!isset($allSkillSatisfied)){
-						$allSkillSatisfied = true;
-					}
-				}else{
-					$offerSkills[$key]['user'] = false;
-					$allSkillSatisfied = false;
-				}
-			}
-			$this->data['offerSkills'] = $offerSkills;
-		}else{
-			$allSkillSatisfied = true;
-			$this->data['offerSkills'] = $offerSkills;
-		}
-		$this->data['allSkillSatisfied'] = $allSkillSatisfied;
+
 		if($offerLocations = $this->function_lib->getOfferLocations($offerID))
 			$this->data['offerLocations'] = $offerLocations;
 		else{
@@ -827,16 +606,6 @@ class Home extends CI_Controller {
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
 		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
 		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
-		$this->data['skills'] = $this->skill_lib->getUserSkills($userID);
-		$premiumSkills = $this->skill_lib->getPremiumSkills($userID);
-		$this->data['premiumSkills'] = $premiumSkills;
-		foreach ($premiumSkills as $key => $value) {
-			$this->data['skillResponse'][$value['skillID']] = $this->skill_lib->getResponses($userID, $value['skillID']);
-			$this->data['skillCorrect'][$value['skillID']] = $this->skill_lib->getCorrectResponses($userID, $value['skillID']);
-			$this->data['skillIncorrect'][$value['skillID']] = $this->skill_lib->getIncorrectResponses($userID, $value['skillID']);
-			$this->data['skillMax'][$value['skillID']] = $this->skill_lib->getSkillMax($value['skillID']);
-		}
-
 		$this->load->view('profile', $this->data);
 	}
 
@@ -847,16 +616,6 @@ class Home extends CI_Controller {
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
 		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
 		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
-		$this->data['skills'] = $this->skill_lib->getUserSkills($userID);
-		$premiumSkills = $this->skill_lib->getPremiumSkills($userID);
-		$this->data['premiumSkills'] = $premiumSkills;
-		foreach ($premiumSkills as $key => $value) {
-			$this->data['skillResponse'][$value['skillID']] = $this->skill_lib->getResponses($userID, $value['skillID']);
-			$this->data['skillCorrect'][$value['skillID']] = $this->skill_lib->getCorrectResponses($userID, $value['skillID']);
-			$this->data['skillIncorrect'][$value['skillID']] = $this->skill_lib->getIncorrectResponses($userID, $value['skillID']);
-			$this->data['skillMax'][$value['skillID']] = $this->skill_lib->getSkillMax($value['skillID']);
-		}
-
 		$this->load->view('report', $this->data);
 	}
 
@@ -1011,20 +770,9 @@ class Home extends CI_Controller {
 
 
 	public function getReport($userID){
-
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
 		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
 		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
-		$this->data['skills'] = $this->skill_lib->getUserSkills($userID);
-		$premiumSkills = $this->skill_lib->getPremiumSkills($userID);
-		$this->data['premiumSkills'] = $premiumSkills;
-		foreach ($premiumSkills as $key => $value) {
-			$this->data['skillResponse'][$value['skillID']] = $this->skill_lib->getResponses($userID, $value['skillID']);
-			$this->data['skillCorrect'][$value['skillID']] = $this->skill_lib->getCorrectResponses($userID, $value['skillID']);
-			$this->data['skillIncorrect'][$value['skillID']] = $this->skill_lib->getIncorrectResponses($userID, $value['skillID']);
-			$this->data['skillMax'][$value['skillID']] = $this->skill_lib->getSkillMax($value['skillID']);
-		}
-
 		$this->load->view('report', $this->data);
 	}
 
