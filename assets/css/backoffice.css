@@ -1,0 +1,100 @@
+/*!
+ * Start Bootstrap - Modern Business (https://startbootstrap.com/template-overviews/modern-business)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.sidebar-item{
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.sidebar-active{
+  z-index: 2;
+  color: #fff;
+  background-color: #2c3e50 !important;
+  border-color: #2c3e50 !important;
+}
+
+.btn-primary{
+  color: #fff;
+  background-color: #2c3e50 !important;
+  border-color: #2c3e50 !important;
+}
+
+a.sidebar-active:hover {
+  color: white !important;
+ }
+
+ .nav-bg{
+   background-color: #2c3e50 !important;
+ }
+
+ .cardheader{
+   color: #fff;
+   background-color: #2c3e50 !important;
+ }
+
+
+ .mcq {
+ 	text-align: left;
+ }
+
+ .options label {
+ 	transition: background-color .3s, ease-in;
+ 	font-size: 15px;
+ 	display: inline-block;
+ 	cursor: pointer;
+ 	position: relative;
+ 	background-color: none;
+ 	color: #222;
+ 	border: 1px solid #2c3e50;
+ 	padding: 2%;
+ 	width: 90%;
+ 	text-align: left;
+ 	margin: 8px;
+ }
+
+ .options input[type="radio"] {
+ 	display: none;
+ }
+
+ .options input[type="radio"]:checked+label {
+ 	background: #2c3e50;
+ 	color: #fff;
+ }
+
+ .opt {
+ 	background-color: #2c3e50;
+ 	padding: 2.2%;
+ 	border: 1px solid #2c3e50;
+ 	color: white;
+ }
+
+ .card-text{
+   font-size: 14px;
+ }

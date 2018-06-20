@@ -1,0 +1,66 @@
+@import url('/assets/css/base/normalize.css');
+@import url('/assets/css/base/layout.css');
+@import url('/assets/css/base/base.css');
+@import url('/assets/css/components/footer.css');
+@import url('/assets/css/components/forms.css');
+@import url('/assets/css/components/logged-out-header.css');
+.main-container {
+	background: url('/assets/img/landing-page-bg.png') center center no-repeat;
+	background-size: cover;
+}
+
+.main-body {
+	justify-content: flex-end;
+	align-items: flex-start;
+}
+
+.register-form-container {
+	background: rgba(255, 255, 255, 0.8);
+	margin: 35px 0 20px;
+	padding: 20px 30px;
+	width: 100%;
+	max-width: 350px;
+}
+
+.register-form-container > h2 {
+	margin: 0 0 10px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.register-form .form-group {
+	padding-left: 0;
+}
+
+.register-form .form__input {
+	margin: 5px 0;
+}
+
+.register-form .select {
+	width: 70px;
+}
+
+.register-form .btn {
+	border: 0;
+	padding: 7px 15px;
+	width: 100%;
+	max-width: 130px;
+	text-transform: uppercase;
+	margin: auto;
+	display: block;
+}
+
+label[for="accountType"] {
+	display: inline-block;
+	width: calc(100% - 75px);
+}
+
+.register-info {
+	text-align: center;
+	font-size: 0.875em;
+	margin-bottom: 10px;
+}
+
+.register-info > a {
+	font-size: 0.875rem;
+}
