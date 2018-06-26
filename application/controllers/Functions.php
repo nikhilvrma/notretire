@@ -306,7 +306,7 @@ class Functions extends CI_Controller {
 			$newCollege = $x;
 		}
 		if($type == "" || $year == "" || $scoreType == "" || $score == ""){
-			$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.1','color'=>'red'));
 			redirect(base_url('educational-details'));
 		}
 		if($scoreType == 1){
@@ -323,7 +323,7 @@ class Functions extends CI_Controller {
 
 		if($other == 1){
 			if($newCollege == ''){
-				$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+				$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.2','color'=>'red'));
 				redirect(base_url('educational-details'));
 			}
 		}
@@ -349,7 +349,7 @@ class Functions extends CI_Controller {
 				$fileName = $base_url.'assets/uploads/EducationalDocuments/'.$x['file_name'];
 				if($type == 1 || $type == 2){
 				if($board == ''){
-					$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+					$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.3','color'=>'red'));
 					redirect(base_url('educational-details'));
 				}
 				if($error == ''){
@@ -377,12 +377,12 @@ class Functions extends CI_Controller {
 			if($type == 3){
 				if($other != 1){
 					if($college == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.4','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 				}
 					if($courseBach == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.5','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 					// $newCollege = str_replace(' ', '', $newCollege);
@@ -421,12 +421,12 @@ class Functions extends CI_Controller {
 			if($type == 4){
 				if($other != 1){
 					if($college == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.6','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 				}
-					if($courseBach == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+					if($courseMast == ''){
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.7','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 					// $newCollege = str_replace(' ', '', $newCollege);
@@ -481,7 +481,7 @@ class Functions extends CI_Controller {
 			$fileName = $base_url.'assets/uploads/EducationalDocuments/'.$x['file_name'];
 			if($type == 1 || $type == 2){
 				if($board == ''){
-					$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+					$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.8','color'=>'red'));
 					redirect(base_url('educational-details'));
 				}
 				if($error == ''){
@@ -509,12 +509,12 @@ class Functions extends CI_Controller {
 			if($type == 3){
 				if($other != 1){
 					if($college == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.9','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 				}
 					if($courseBach == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.10','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 					// $newCollege = str_replace(' ', '', $newCollege);
@@ -552,12 +552,12 @@ class Functions extends CI_Controller {
 			if($type == 4){
 				if($other != 1){
 					if($college == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.11','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 				}
-					if($courseBach == ''){
-						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
+					if($courseMast == ''){
+						$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.12','color'=>'red'));
 						redirect(base_url('educational-details'));
 					}
 					// $newCollege = str_replace(' ', '', $newCollege);
@@ -740,7 +740,7 @@ class Functions extends CI_Controller {
 				'supportingDocument' => $fileName
 			);
 
-			if($this->function_lib->addWorkExperience($data, $id)){
+			if($this->function_lib->addWorkExperience($data, $_POST['id'])){
 				$this->session->set_flashdata('message', array('content'=>'Work Experience Added Successfully.','color'=>'green'));
 				redirect(base_url('work-experience'));
 			}else{
@@ -1100,8 +1100,8 @@ class Functions extends CI_Controller {
 		$_SESSION['redirect'] = $redirect;
 		$companyData = $this->function_lib->getCompanyData($_SESSION['user_data']['userID']);
 
-		if(isset($_POST['edit']) && $_POST['edit'] == 1){
-			if($this->function_lib->getUserIDForOffer($_POST['id']) != $_SESSION['user_data']['userID']){
+		if(isset($_POST['edit'])){
+			if($this->function_lib->getUserIDForOffer($_POST['edit']) != $_SESSION['user_data']['userID']){
 				redirect(base_url('404'));
 			}
 		}
@@ -1304,6 +1304,7 @@ class Functions extends CI_Controller {
 			}else{
 					$result = $this->function_lib->updateOffer($_POST['edit'], $data);
 				if($result){
+					$this->function_lib->deleteLocations($_POST['edit']);
 					 $offerID = $_POST['edit'];
 					if($workHome == 2){
 						$locations = json_decode($selectedLocations);

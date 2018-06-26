@@ -641,12 +641,10 @@ class Function_model extends CI_Model {
 		return $this->db->insert('applicants', $data);
 	}
 
-	public function deleteSkillsLocations($offerID){
+	public function deleteLocations($offerID){
 		$this->db->where('offerID', $offerID);
 		$result1 = $this->db->delete('offerLocation');
-		$this->db->where('offerID', $offerID);
-		$result2 = $this->db->delete('offerSkills');
-		if($result1 && $result2){
+		if($result1){
 			return true;
 		}else{
 			return false;
@@ -801,7 +799,7 @@ class Function_model extends CI_Model {
 
 	public function getUserIDForOffer($id){
 		$result = $this->db->get_where('offers', array('offerID' => $id))->result_array();
-		return $result[0]['userID'];
+		return $result[0]['addedBy'];
 	}
 
 	public function shortlistCandidate($userID, $offer){

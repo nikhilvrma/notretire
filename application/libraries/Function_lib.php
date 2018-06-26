@@ -418,10 +418,10 @@ class Function_lib {
 		return $CI->function->insertApplicationData($data);
 	}
 
-	public function deleteSkillsLocations($offerID){
+	public function deleteLocations($offerID){
 		$CI = &get_instance();
 		$CI->load->model('function_model','function');
-		return $CI->function->deleteSkillsLocations($offerID);
+		return $CI->function->deleteLocations($offerID);
 	}
 
 	public function getAllOfferLocations(){
