@@ -168,7 +168,7 @@
               <label><b>Available For:</b></label>
               <table class="table">
                 <tr>
-                  <?php if($generalData['available'] == 0){echo "Not available for both Job and Internship Offers.";}else if($generalData['available'] == 1){echo "Available for Job Offers.";}else if($generalData['available'] == 2){echo "Available for Internship Offers.";}else{echo "Available for Job and Internship Offers.";}?>
+                  <?php if($generalData['available'] == 0){echo "Not available for both Job Offers.";}else if($generalData['available'] == 1){echo "Available for Job Offers.";}?>
                 </tr>
                 <tr>
                   <td colspan="3"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availability" style="color: white; float: right;">Update Availability</button></td>
@@ -388,10 +388,8 @@
               <div class="controls">
                 <label>Availability:</label>
                 <select name = "availability" class="form-control">
-                    <option value = "0">Not available for both Job and Internship Offers</option>
+                    <option value = "0">Not available for both Job Offers</option>
                     <option value = "1">Available for Job Offers</option>
-                    <option value = "2">Available for Internship Offers</option>
-                    <option value = "3">Available for Job and Internship Offers</option>
                   </select>
               </div>
             </div>

@@ -48,7 +48,6 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <p class="card-text"><b>Offer Type: </b><?php if($offer['offerType'] == 1){echo "Job Offer";}else{echo "Internship Offer";}?></p>
                       <?php $location = ""; $i = 1; if(!empty($offerLocations[$offer['offerID']]))foreach($offerLocations[$offer['offerID']] as $locations){ if($i == 1){$location = $location.$locations['city'];}else{$location = $location.', '.$locations['city'];} $i++;}else $location = "Work From Home"; ?>
                       <p class="card-text"><b>Application Deadline: </b><?= date_format(date_create($offer['applicationDeadline']), 'd-F-Y')?></p>
                       <p class="card-text"><b>Offer Location(s): </b><?= $location?></p>
@@ -141,8 +140,6 @@
             container.find('.offerTitle').html(res.offers[i].offerTitle)
             if(res.offers[i].offerType == 1){
               offerType = 'Job Offer'
-            }else{
-              offerType = 'Internship Offer'
             }
 
             locations = '';

@@ -202,7 +202,7 @@
                           <div class="controls">
                             <label>Supporting Document:</label>
                             <input type="file" class="form-control" name = "file" id ="file" placeholder="Score">
-                            <p class="help-block" style="color: red; font-size: 13px;">Upload your Internship/Work Certificate, to verify the Work Experience.</p>
+                            <p class="help-block" style="color: red; font-size: 13px;">Upload your Work Certificate, to verify the Work Experience.</p>
                           </div>
                         </div>
                         </div>
