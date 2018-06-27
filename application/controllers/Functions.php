@@ -1018,7 +1018,7 @@ class Functions extends CI_Controller {
 	}
 
 	public function addOffer(){
-		$offerType = '';
+		$offerType = 1;
 		$offerTitle = '';
 		$offerDescription = '';
 		$openings = '';
@@ -1033,10 +1033,6 @@ class Functions extends CI_Controller {
 		$partTime = '';
 		$duration = '';
 		$applicantType = '';
-
-		if($x = $this->input->post('offerType')){
-			$offerType = $x;
-		}
 		if($x = $this->input->post('offerTitle')){
 			$offerTitle = $x;
 		}
@@ -1079,9 +1075,7 @@ class Functions extends CI_Controller {
 		if($x = $this->input->post('applicantType')){
 			$applicantType = $x;
 		}
-
 		$redirect = array(
-			'offerType' => $offerType,
 			'offerDescription'=> $offerDescription,
 			'offerTitle'=> $offerTitle,
 			'openings'=> $openings,
@@ -1243,7 +1237,7 @@ class Functions extends CI_Controller {
 			}
 
 
-			if($offerType == '' || $offerTitle == '' || $offerDescription == '' || $openings == '' || $joiningDate == '' || $applicationDeadline == ''){
+			if($offerTitle == '' || $offerDescription == '' || $openings == '' || $joiningDate == '' || $applicationDeadline == ''){
 				$this->session->set_flashdata('message', array('content'=>'Incomplete Data. Please Try Again.','color'=>'red'));
 				if(isset($_POST['edit'])){
 					redirect(base_url('edit-offer/'.$_POST['edit']));
@@ -1839,12 +1833,8 @@ public function clearFilters($offerID){
 		unset($_SESSION['filter']);
 		unset($_SESSION['data']);
 		unset($_SESSION['appliedFilters']);
-		$offerType = '';
 		$offerLocations = '';
 		$offerSkills = '';
-		if($x = $this->input->get('offerType')){
-			$offerType = $x;
-		}
 		if($x = $this->input->get('offerLocations')){
 			$offerLocations = $x;
 		}
@@ -1852,25 +1842,14 @@ public function clearFilters($offerID){
 			$offerSkills = $x;
 		}
 			$_SESSION['appliedFilters'] = array(
-				'offerType' => $offerType,
 				'offerSkills' => $offerSkills,
 				'offerLocations' => $offerLocations);
 		// var_dump($offerLocations); die;
 		$data['offers'] = $this->function_lib->getAllOffers(0,10);
 		$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
 
-		if(!empty($offerType)){
-		$typeOffers = array_column($data['offers'], 'offerID');
-		$j = 0;
-		foreach ($data['offers'] as $key => $offer) {
-			if(!in_array($offer['offerType'], $offerType)){
-				unset($typeOffers[$j]);
-			}
-			$j++;
-		}
-		}else{
-			$typeOffers = array();
-		}
+		$typeOffers = array();
+
 		$skills = array();
 		if(!empty($offerSkills)){
 		$skillOffers = array_column($data['offers'], 'offerID');
