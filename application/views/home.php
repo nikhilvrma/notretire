@@ -120,7 +120,7 @@
                   <div class="form-group col-md-9">
                     <label for="type"><b>You are a _____?</b></label>
                     <select class="form-control" name="accountType" id="type" required>
-                      <option value="1">Job/Internship Opportunity Seeker</option>
+                      <option value="1">Job Opportunity Seeker</option>
                       <option value="2">Employer</option>
                     </select>
                   </div>

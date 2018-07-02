@@ -42,17 +42,6 @@
 
             <div class="row">
 
-              <div class="col-md-3 control-group form-group offerType">
-                <div class="controls">
-                  <label><b>Offer Type:</b></label>
-                  <select class="form-control" name="offerType" id ="offerType" required>
-                    <option value="1" <?php if(isset($redirect) && $redirect['offerType'] == 1){ echo "selected";}?>>Job Offer</option>
-                    <option value="2" <?php if(isset($redirect) && $redirect['offerType'] == 2){ echo "selected";}?>>Internship Offer</option>
-                  </select>
-                  <p class="help-block"></p>
-                </div>
-              </div>
-
               <div class="col-md-4 control-group form-group openings">
                 <div class="controls">
                   <label><b>Number of Openings:</b></label>

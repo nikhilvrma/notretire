@@ -21,7 +21,7 @@
 
        <div class="col-lg-12 mb-4">
 
-         <h4 class="mt-4 mb-3" style="float: right;"><b>Job/Internship Application and Assessment Report</b></h4>
+         <h4 class="mt-4 mb-3" style="float: right;"><b>Job Application and Assessment Report</b></h4>
 
          <p class="mt-4 mb-3" style="float: right; font-size: 14px;"></p>
          <div class="clearfix"></div>

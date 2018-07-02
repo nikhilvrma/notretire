@@ -79,7 +79,6 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-7 mb-4">
-                      <p class="card-text"><b>Offer Type: </b><?php if($offer['offerType'] == 1){echo "Job Offer";}else{echo "Internship Offer";}?></p>
                       <?php $location = ""; $i = 1; if(!empty($offerLocations[$offer['offerID']]))foreach($offerLocations[$offer['offerID']] as $locations){ if($i == 1){$location = $location.$locations['city'];}else{$location = $location.', '.$locations['city'];} $i++;}else $location = "Work From Home";?>
                       <p class="card-text"><b>Offer Location(s): </b><?= $location?></p>
 
@@ -128,15 +127,6 @@
           <form method = "GET" action = "<?=base_url('functions/filterAvailableOffers')?>">
           <div class="modal-body">
               <div class="row">
-              <div class="col-md-12 control-group form-group">
-                <div class="controls">
-                  <b>Offer Type</b>
-                  <div style="margin-top: 10px;">
-                    <div class="col-sm-12" style="font-size: 14px;"><input type="checkbox" name="offerType[]" value = "1" <?php if(isset($appliedFilters['offerType']) && $appliedFilters['offerType'] != '' && in_array('1',$appliedFilters['offerType'])){echo "checked";}?>><label style="margin-left: 5px;">Job Offers</label></div>
-                    <div class="col-sm-12" style="font-size: 14px;"><input type="checkbox" name="offerType[]" value = "2" <?php if(isset($appliedFilters['offerType']) && $appliedFilters['offerType'] != '' && in_array('2',$appliedFilters['offerType'])){echo "checked";}?>><label style="margin-left: 5px;">Internship Offers</label></div>
-                  </div>
-                </div>
-              </div>
 
               <div class="col-md-12 control-group form-group">
                 <div class="controls">
@@ -208,8 +198,6 @@
             container.find('.offerTitle').html(res.offers[i].offerTitle)
             if(res.offers[i].offerType == 1){
               offerType = 'Job Offer'
-            }else{
-              offerType = 'Internship Offer'
             }
 
             locations = '';

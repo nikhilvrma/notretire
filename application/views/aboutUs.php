@@ -58,10 +58,10 @@
             <ul>
               <li>Bridge the gap between companies and potential candidates.</li>
               <li>Platform to test individualistic skill sets.</li>
-              <li>Help in providing dream jobs/internship.</li>
-              <li>Employers can post skill based jobs/internships.</li>
+              <li>Help in providing dream jobs.</li>
+              <li>Employers can post skill based jobs.</li>
               <li>Employers can save on time and resources, as only skilled candidates are provided.</li>
-              <li>Candidates can verify skill possessed by them and apply for internship/job according to the skills verified.</li>
+              <li>Candidates can verify skill possessed by them and apply for job according to the skills verified.</li>
               <li>Candidates get a chance for self improvement and get recognised among their colleagues.</li>
               <li>Hassle free and relaxed recruitment process.</li>
             </ul>

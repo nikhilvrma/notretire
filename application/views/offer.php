@@ -22,8 +22,6 @@
     }
     if($offerDetails[0]['offerType'] == 1 ){
       $type = 'Job';
-    }else{
-      $type = 'Internship';
     }
     $employer = $employerDetails['companyName'];
     if(!empty($offerLocations)){
