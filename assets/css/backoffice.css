@@ -29,21 +29,21 @@ body {
 }
 
 .sidebar-item{
-  color: #2f3640;
+  color: #3d3d3d;
   font-size: 14px;
 }
 
 .sidebar-active{
   z-index: 2;
   color: #fff;
-  background-color: #2f3640 !important;
-  border-color: #2f3640 !important;
+  background-color: #3d3d3d !important;
+  border-color: #3d3d3d !important;
 }
 
 .btn-primary{
   color: #fff;
-  background-color: #2f3640 !important;
-  border-color: #2f3640 !important;
+  background-color: #3d3d3d !important;
+  border-color: #3d3d3d !important;
 }
 
 a.sidebar-active:hover {
@@ -51,12 +51,12 @@ a.sidebar-active:hover {
  }
 
  .nav-bg{
-   background-color: #2f3640 !important;
+   background-color: #3d3d3d !important;
  }
 
  .cardheader{
    color: #fff;
-   background-color: #2f3640 !important;
+   background-color: #3d3d3d !important;
  }
 
 
@@ -72,7 +72,7 @@ a.sidebar-active:hover {
  	position: relative;
  	background-color: none;
  	color: #222;
- 	border: 1px solid #2f3640;
+ 	border: 1px solid #3d3d3d;
  	padding: 2%;
  	width: 90%;
  	text-align: left;
@@ -84,14 +84,14 @@ a.sidebar-active:hover {
  }
 
  .options input[type="radio"]:checked+label {
- 	background: #2f3640;
+ 	background: #3d3d3d;
  	color: #fff;
  }
 
  .opt {
- 	background-color: #2f3640;
+ 	background-color: #3d3d3d;
  	padding: 2.2%;
- 	border: 1px solid #2f3640;
+ 	border: 1px solid #3d3d3d;
  	color: white;
  }
 

@@ -41,6 +41,7 @@
           <li class="nav-item" style="margin-right: 10px;">
             <label style="color: white;"><b>Password</b></label>
             <input type="password" name="password" placeholder="Password" style="padding: 5px;" required>
+            <br>
             <a style="color: white; font-size: 12px;" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a>
           </li>
           <li class="nav-item">
