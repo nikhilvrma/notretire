@@ -37,7 +37,7 @@
           <h3 class="mt-4 mb-3" style="float: right;"><?php echo $pageTitle; ?></h3>
           <div class="clearfix"></div>
           <hr>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12 mb-4">
               <div class="row">
                 <div class="col-sm-2 mb-4">
@@ -48,21 +48,9 @@
               <div class="col-sm-2 mb-4">
                 <a href = "<?= base_url('functions/clearOfferFilters')?>" class="btn btn-primary" style="float: right;">Clear Filters</a>
               </div>
-              <div class="col-sm-7 mb-4">
-                <form class="form-inline" style="float: right;" method="GET" action = "<?= base_url('functions/filterRelevantAvailable')?>">
-                  <label style="margin: 5px;"><b>Display Offers</b></label>
-                  <br>
-                  <select class="form-control mb-2 mr-sm-2" name="status">
-                    <option value = "1">All Available Offers</option>
-                    <option value = "2"  <?php if(isset($status) && $status == 2){echo "selected";}?>>My Relevant Offers</option>
-                  </select>
-
-                  <button type="submit" class="btn btn-primary mb-2">Display</button>
-                </form>
-              </div>
             </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="row">
             <div class="col-md-12 mb-4">
@@ -115,7 +103,7 @@
 
     </div>
 
-    <div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -154,7 +142,7 @@
         </form>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <?php echo $footer; ?>
 
