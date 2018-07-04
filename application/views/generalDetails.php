@@ -84,20 +84,6 @@
                   <p class="help-block"></p>
                 </div>
               </div>
-
-              <?php if($_SESSION['user_data']['accountType'] == 1){?>
-              <div class="col-md-12 control-group form-group">
-                <div class="controls">
-                  <label><b>Career Objective:</b></label>
-                  <textarea class="form-control" id="careerObjective" name="careerObjective" required>
-                     <?php echo $generalData['careerObjective']; ?>
-                  </textarea>
-                  <p class="help-block"></p>
-                </div>
-              </div>
-
-
-              <?php } ?>
               <?php if($_SESSION['user_data']['accountType'] == 2){?>
               <div class="col-md-12 control-group form-group">
                 <div class="controls">
@@ -163,21 +149,7 @@
             </div>
           </div>
 
-          <div class="col-md-12 control-group form-group" style="margin-top: 5% ">
-            <div class="controls">
-              <label><b>Available For:</b></label>
-              <table class="table">
-                <tr>
-                  <?php if($generalData['available'] == 0){echo "Not available for both Job Offers.";}else if($generalData['available'] == 1){echo "Available for Job Offers.";}?>
-                </tr>
-                <tr>
-                  <td colspan="3"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availability" style="color: white; float: right;">Update Availability</button></td>
-                </tr>
 
-              </tbody>
-            </table>
-            </div>
-          </div>
 
           <?php } ?>
 
@@ -366,39 +338,6 @@
           <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Add Location</button>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="availability" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Availability</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form method = "POST" action = "<?= base_url('functions/addAvailability')?>">
-        <div class="modal-body">
-            <div class="row">
-            <div class="col-md-12 control-group form-group">
-              <div class="controls">
-                <label>Availability:</label>
-                <select name = "availability" class="form-control">
-                    <option value = "0">Not available for both Job Offers</option>
-                    <option value = "1">Available for Job Offers</option>
-                  </select>
-              </div>
-            </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Update Availability</button>
         </div>
       </form>
       </div>

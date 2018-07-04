@@ -780,15 +780,10 @@ class Functions extends CI_Controller {
 	public function updateGeneralDetails(){
 		$location = '';
 		if($_SESSION['user_data']['accountType'] == 1){
-			$careerObjective = '';
-			if($x = $this->input->post('careerObjective')){
-				$careerObjective = $x;
-			}
 			if($x = $this->input->post('location')){
 				$location = $x;
 			}
 			$data = array(
-				'careerObjective' => $careerObjective,
 				'cityID' => $location
 			);
 			$result = $this->function_lib->updateGeneralDetails($data, $_SESSION['user_data']['userID']);
@@ -826,31 +821,6 @@ class Functions extends CI_Controller {
 			redirect(base_url('general-details'));
 		}
 		else{
-			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','color'=>'red'));
-			redirect(base_url('general-details'));
-		}
-	}
-
-
-	public function addAvailability(){
-		$availability = '';
-		if($x = $this->input->post('availability')){
-			$availability = $x;
-		}
-
-		if($availability == ''){
-			$this->session->set_flashdata('message', array('content'=>'Select a offer type To update availability.','color'=>'red'));
-			redirect(base_url('general-details'));
-		}
-
-		$data = array(
-				'available' => $availability
-			);
-		$result = $this->function_lib->updateGeneralDetails($data, $_SESSION['user_data']['userID']);
-		if($result){
-			$this->session->set_flashdata('message', array('content'=>'Availability updated.','color'=>'green'));
-			redirect(base_url('general-details'));
-		}else{
 			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','color'=>'red'));
 			redirect(base_url('general-details'));
 		}
@@ -1591,6 +1561,7 @@ public function clearFilters($offerID){
 		}
 	}
 
+
 	public function applyBothFilters($type, $offerID){
 		$data = $_SESSION['dataFilter'];
 		if($type == 1){
@@ -1608,58 +1579,25 @@ public function clearFilters($offerID){
 	redirect(base_url('hiring-nucleus/applicants/'.$offerID));
 	}
 
+
 	public function filterApplicantsByParameters($offerID){
 		unset($_SESSION['filter']);
 		unset($_SESSION['data']);
 		unset($_SESSION['appliedFilters']);
 		$gender = '';
 		$locations = '';
-		$skills = '';
-		$colleges = '';
-		$courses = '';
 		if($x = $this->input->get('gender')){
 			$gender = $x;
 		}
 		if($x = $this->input->get('locations')){
 			$locations = $x;
 		}
-		if($x = $this->input->get('skills')){
-			$skills = $x;
-		}
-		if($x = $this->input->get('colleges')){
-			$colleges = $x;
-		}
-		if($x = $this->input->get('courses')){
-			$courses = $x;
-		}
 			$_SESSION['appliedFilters'] = array(
 				'gender' => $gender,
 				'locations' => $locations,
-				'skills' => $skills,
-				'colleges' => $colleges,
-				'courses' => $courses
 			);
 		// var_dump($offerLocations); die;
 		$data['applicants'] = $this->function_lib->getOfferApplicants($offerID, -1, -1, 1);
-		$userSkills = $this->function_lib->getOfferApplicantSkills($offerID, -1, -1, 1);
-		$applicants = array_column($userSkills, 'applicantID');
-		$_SESSION['skillOffset'] = count($applicants);
-		$i = 0;
-		foreach ($data['applicants'] as $key => $value) {
-				$x = array_search($value['applicantID'], $applicants);
-			if(is_int($x)){
-				$data['applicants'][$i]['skillID'] = $userSkills[$x]['skillID'];
-				$data['applicants'][$i]['type'] = $userSkills[$x]['type'];
-				$data['applicants'][$i]['score'] = $userSkills[$x]['score'];
-				$data['applicants'][$i]['skillName'] = $userSkills[$x]['skillName'];
-			}else{
-				$data['applicants'][$i]['skillID'] = NULL;
-				$data['applicants'][$i]['type'] = NULL;
-				$data['applicants'][$i]['score'] = NULL;
-				$data['applicants'][$i]['skillName'] = NULL;
-			}
-			$i++;
-		}
 		$data['hasMore'] = $this->function_lib->hasMoreOfferApplicants($offerID, -1, -1, 1);
 
 		if(!empty($gender)){
@@ -1673,74 +1611,6 @@ public function clearFilters($offerID){
 		}
 		}else{
 			$genderApplicants = array();
-		}
-
-		if(!empty($skills)){
-		$skillApplicants = array_column($data['applicants'], 'userID');
-		$j = 0;
-		foreach ($data['applicants'] as $key => $applicant) {
-			$applicantSkill = $this->function_lib->getApplicantSkills($applicant['userID']);
-			$i = 0;
-			$skillIDs = array();
-			foreach ($applicantSkill as $key => $value) {
-				$skillIDs[$i] = $value['skillID'];
-				$i++;
-			}
-
-			if(empty(array_intersect($skills, $skillIDs))){
-				if(!in_array('0', $skills)){
-					unset($skillApplicants[$j]);
-				}
-			}
-			$j++;
-		}
-		}else{
-			$skillApplicants = array();
-		}
-		if(!empty($colleges)){
-		$collegeApplicants = array_column($data['applicants'], 'userID');
-		$j = 0;
-		foreach ($data['applicants'] as $key => $applicant) {
-			$applicantCollege = $this->function_lib->getApplicantColleges($applicant['userID']);
-			$i = 0;
-			$collegeIDs = array();
-			foreach ($applicantCollege as $key => $value) {
-				$collegeIDs[$i] = $value['instituteID'];
-				$i++;
-			}
-
-			if(empty(array_intersect($colleges, $collegeIDs))){
-				if(!in_array('0', $colleges)){
-					unset($collegeApplicants[$j]);
-				}
-			}
-			$j++;
-		}
-		}else{
-			$collegeApplicants = array();
-		}
-
-		if(!empty($courses)){
-		$courseApplicants = array_column($data['applicants'], 'userID');
-		$j = 0;
-		foreach ($data['applicants'] as $key => $applicant) {
-			$applicantCourse = $this->function_lib->getApplicantCourses($applicant['userID']);
-			$i = 0;
-			$courseIDs = array();
-			foreach ($applicantCourse as $key => $value) {
-				$courseIDs[$i] = $value['courseID'];
-				$i++;
-			}
-
-			if(empty(array_intersect($courses, $courseIDs))){
-				if(!in_array('0', $courses)){
-					unset($courseApplicants[$j]);
-				}
-			}
-			$j++;
-		}
-		}else{
-			$courseApplicants = array();
 		}
 
 		if(!empty($locations)){
@@ -1772,32 +1642,12 @@ public function clearFilters($offerID){
 			$filterArray[$g] = $locationApplicants;
 			$g++;
 		}
-		if(!empty($skillApplicants)){
-			$filterArray[$g] = $skillApplicants;
-			$g++;
-		}
+
 		if(!empty($genderApplicants)){
 			$filterArray[$g] = $genderApplicants;
 			$g++;
 		}
-		if(!empty($collegeApplicants)){
-			$filterArray[$g] = $collegeApplicants;
-			$g++;
-		}
-		if(!empty($courseApplicants)){
-			$filterArray[$g] = $courseApplicants;
-			$g++;
-		}
 
-		if($g == 5){
-			$filteredOffer = array_intersect($filterArray[0], $filterArray[1], $filterArray[2], $filterArray[3], $filterArray[4]);
-		}
-		if($g == 4){
-			$filteredOffer = array_intersect($filterArray[0], $filterArray[1], $filterArray[2], $filterArray[3]);
-		}
-		if($g == 3){
-			$filteredOffer = array_intersect($filterArray[0], $filterArray[1], $filterArray[2]);
-		}
 		if($g == 2){
 			$filteredOffer = array_intersect($filterArray[0], $filterArray[1]);
 		}
@@ -1829,281 +1679,281 @@ public function clearFilters($offerID){
 
 
 
-	public function filterAvailableOffers(){
-		unset($_SESSION['filter']);
-		unset($_SESSION['data']);
-		unset($_SESSION['appliedFilters']);
-		$offerLocations = '';
-		$offerSkills = '';
-		if($x = $this->input->get('offerLocations')){
-			$offerLocations = $x;
-		}
-		if($x = $this->input->get('offerSkills')){
-			$offerSkills = $x;
-		}
-			$_SESSION['appliedFilters'] = array(
-				'offerSkills' => $offerSkills,
-				'offerLocations' => $offerLocations);
-		// var_dump($offerLocations); die;
-		$data['offers'] = $this->function_lib->getAllOffers(0,10);
-		$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
-
-		$typeOffers = array();
-
-		$skills = array();
-		if(!empty($offerSkills)){
-		$skillOffers = array_column($data['offers'], 'offerID');
-		$j = 0;
-		foreach ($data['offers'] as $key => $offer) {
-			$offerSkill = $this->function_lib->getOfferSkills($offer['offerID']);
-			$i = 0;
-			foreach ($offerSkill as $key => $value) {
-				$skills[$i] = $value['skillID'];
-				$i++;
-			}
-
-			if(empty(array_intersect($offerSkills, $skills))){
-				if(in_array('0', $offerSkills)){
-					if(!empty($offerSkill))
-						unset($skillOffers[$j]);
-				}else{
-					unset($skillOffers[$j]);
-				}
-			}
-			$j++;
-		}
-		}else{
-			$skillOffers = array();
-		}
-
-
-		if(!empty($offerLocations)){
-		$locationOffers = array_column($data['offers'], 'offerID');
-		$j = 0;
-		foreach ($data['offers'] as $key => $offer) {
-			$offerLocation = $this->function_lib->getOfferLocations($offer['offerID']);
-			$i = 0;
-
-			foreach ($offerLocation as $key => $value) {
-				$locations[$i] = $value['cityID'];
-				$i++;
-			}
-
-			if(empty(array_intersect($offerLocations, $locations))){
-				if(in_array('0', $offerLocations)){
-					if(!empty($offerLocation))
-						unset($locationOffers[$j]);
-				}else{
-					unset($locationOffers[$j]);
-				}
-			}
-			$j++;
-		}
-		}else{
-			$locationOffers = array();
-		}
-
-		$filterArray= array();
-		$g=0;
-		if(!empty($locationOffers)){
-			$filterArray[$g] = $locationOffers;
-			$g++;
-		}
-		if(!empty($skillOffers)){
-			$filterArray[$g] = $skillOffers;
-			$g++;
-		}
-		if(!empty($typeOffers)){
-			$filterArray[$g] = $typeOffers;
-			$g++;
-		}
-
-		if($g == 3){
-			$filteredOffer = array_intersect($filterArray[0], $filterArray[1], $filterArray[2]);
-		}
-		if($g == 2){
-			$filteredOffer = array_intersect($filterArray[0], $filterArray[1]);
-		}
-		if($g == 1){
-			$filteredOffer = $filterArray[0];
-		}
-		if($g == 0){
-			$filteredOffer = array();
-		}
-
-
-		$j=0;
-		foreach ($data['offers'] as $key => $offer) {
-			if(!in_array($offer['offerID'], $filteredOffer)){
-				unset($data['offers'][$j]);
-			}
-			$j++;
-		}
-		$offers = $data['offers'];
-		if(!empty($offers)){
-			foreach ($offers as $key => $offer) {
-				if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID']))
-					$data['offerSkills'][$offer['offerID']] = $offerSkills;
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
-				if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID']))
-					$data['offerLocations'][$offer['offerID']] = $offerLocations;
-				else{
-					$data['offerLocations'][$offer['offerID']] = array();
-				}
-			}
-			// var_dump($_SESSION['appliedFilters']);die;
-			$_SESSION['filter'] = 1;
-			$_SESSION['data'] = $data;
-			$_SESSION['dataFilter'] = $data;
-			$_SESSION['byParameter'] = 1;
-			redirect(base_url('available-offers'));
-		}else{
-			$_SESSION['filter'] = 1;
-			$_SESSION['data'] = $data;
-			$_SESSION['dataFilter'] = $data;
-			$_SESSION['byParameter'] = 1;
-			redirect(base_url('available-offers'));
-		}
-
-	}
-
-	public function clearOfferFilters(){
-		if(isset($_SESSION['filter'])){
-			unset($_SESSION['filter']);
-		}
-		if(isset($_SESSION['data'])){
-			unset($_SESSION['data']);
-		}
-		if(isset($_SESSION['dataFilter'])){
-			unset($_SESSION['dataFilter']);
-		}
-		if(isset($_SESSION['byParameter'])){
-			unset($_SESSION['byParameter']);
-		}
-		redirect(base_url('available-offers'));
-	}
-
-	public function applyBothOfferFilters($status){
-		$data['offers'] = $_SESSION['dataFilter']['offers'];
-		$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
-		if($status == 1){
-			redirect(base_url('available-offers'));
-		}else{
-			$userSkills =  $this->skill_lib->getUserSkills($_SESSION['user_data']['userID']);
-			$i=0;
-			$skills = array();
-			foreach ($userSkills as $key => $value) {
-				$skills[$i] = $value['skillID'];
-				$i++;
-			}
-			// var_dump($data);die;
-			$j = 0;
-			$data['userSkills'] = $skills;
-			foreach ($data['offers'] as $key => $offer) {
-				$offerSkills = $this->function_lib->getOfferSkills($offer['offerID']);
-				$i = 0;
-				$offerSkill = array();
-				foreach ($offerSkills as $key => $value) {
-					$offerSkill[$i] = $value['skillID'];
-					$i++;
-				}
-				if(empty(array_intersect($offerSkill, $skills))){
-					if(!empty($offerSkills))
-					unset($data['offers'][$j]);
-				}
-				$j++;
-			}
-		}
-		$data['status'] = $status;
-		$offers = $data['offers'];
-		if(!empty($offers)){
-			foreach ($offers as $key => $offer) {
-				if($offergetSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
-					$data['offerSkills'][$offer['offerID']] = $offergetSkills;
-				}
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
-				if($offergetLocations = $this->function_lib->getOfferLocations($offer['offerID']))
-					$data['offerLocations'][$offer['offerID']] = $offergetLocations;
-				else{
-					$data['offerLocations'][$offer['offerID']] = array();
-				}
-			}
-
-			$_SESSION['filter'] = 1;
-			$_SESSION['data'] = $data;
-			redirect(base_url('available-offers'));
-		}else{
-			$_SESSION['filter'] = 1;
-			$_SESSION['data'] = $data;
-			redirect(base_url('available-offers'));
-		}
-	}
-
-	public function filterRelevantAvailable(){
-		unset($_SESSION['filter']);
-		unset($_SESSION['data']);
-		$status = $this->input->get('status');
-		if(isset($_SESSION['byParameter']) && $_SESSION['byParameter'] == 1){
-			$this->applyBothOfferFilters($status);
-		}
-		$data['offers'] = $this->function_lib->getAllOffers(0, 10);
-		$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
-		if($status == 1){
-			redirect(base_url('available-offers'));
-		}else{
-			$userSkills =  $this->skill_lib->getUserSkills($_SESSION['user_data']['userID']);
-			$i=0;
-			$skills = array();
-			foreach ($userSkills as $key => $value) {
-				$skills[$i] = $value['skillID'];
-				$i++;
-			}
-			$j = 0;
-			$data['userSkills'] = $skills;
-			foreach ($data['offers'] as $key => $offer) {
-				$offerSkills = $this->function_lib->getOfferSkills($offer['offerID']);
-				$i = 0;
-				foreach ($offerSkills as $key => $value) {
-					$offerSkill[$i] = $value['skillID'];
-					$i++;
-				}
-				if(empty(array_intersect($offerSkill, $skills))){
-					if(!empty($offerSkills))
-					unset($data['offers'][$j]);
-				}
-				$j++;
-			}
-		}
-		$data['status'] = $status;
-		$offers = $data['offers'];
-		if(!empty($offers)){
-			foreach ($offers as $key => $offer) {
-				if($offergetSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
-					$data['offerSkills'][$offer['offerID']] = $offergetSkills;
-				}
-				else
-					$data['offerSkills'][$offer['offerID']] = array();
-
-				if($offergetLocations = $this->function_lib->getOfferLocations($offer['offerID']))
-					$data['offerLocations'][$offer['offerID']] = $offergetLocations;
-				else{
-					$data['offerLocations'][$offer['offerID']] = array();
-				}
-			}
-
-			$_SESSION['filter'] = 1;
-			$_SESSION['data'] = $data;
-			redirect(base_url('available-offers'));
-		}else{
-			$_SESSION['filter'] = 1;
-			$_SESSION['data'] = $data;
-			redirect(base_url('available-offers'));
-		}
-	}
+	// public function filterAvailableOffers(){
+	// 	unset($_SESSION['filter']);
+	// 	unset($_SESSION['data']);
+	// 	unset($_SESSION['appliedFilters']);
+	// 	$offerLocations = '';
+	// 	$offerSkills = '';
+	// 	if($x = $this->input->get('offerLocations')){
+	// 		$offerLocations = $x;
+	// 	}
+	// 	if($x = $this->input->get('offerSkills')){
+	// 		$offerSkills = $x;
+	// 	}
+	// 		$_SESSION['appliedFilters'] = array(
+	// 			'offerSkills' => $offerSkills,
+	// 			'offerLocations' => $offerLocations);
+	// 	// var_dump($offerLocations); die;
+	// 	$data['offers'] = $this->function_lib->getAllOffers(0,10);
+	// 	$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
+	//
+	// 	$typeOffers = array();
+	//
+	// 	$skills = array();
+	// 	if(!empty($offerSkills)){
+	// 	$skillOffers = array_column($data['offers'], 'offerID');
+	// 	$j = 0;
+	// 	foreach ($data['offers'] as $key => $offer) {
+	// 		$offerSkill = $this->function_lib->getOfferSkills($offer['offerID']);
+	// 		$i = 0;
+	// 		foreach ($offerSkill as $key => $value) {
+	// 			$skills[$i] = $value['skillID'];
+	// 			$i++;
+	// 		}
+	//
+	// 		if(empty(array_intersect($offerSkills, $skills))){
+	// 			if(in_array('0', $offerSkills)){
+	// 				if(!empty($offerSkill))
+	// 					unset($skillOffers[$j]);
+	// 			}else{
+	// 				unset($skillOffers[$j]);
+	// 			}
+	// 		}
+	// 		$j++;
+	// 	}
+	// 	}else{
+	// 		$skillOffers = array();
+	// 	}
+	//
+	//
+	// 	if(!empty($offerLocations)){
+	// 	$locationOffers = array_column($data['offers'], 'offerID');
+	// 	$j = 0;
+	// 	foreach ($data['offers'] as $key => $offer) {
+	// 		$offerLocation = $this->function_lib->getOfferLocations($offer['offerID']);
+	// 		$i = 0;
+	//
+	// 		foreach ($offerLocation as $key => $value) {
+	// 			$locations[$i] = $value['cityID'];
+	// 			$i++;
+	// 		}
+	//
+	// 		if(empty(array_intersect($offerLocations, $locations))){
+	// 			if(in_array('0', $offerLocations)){
+	// 				if(!empty($offerLocation))
+	// 					unset($locationOffers[$j]);
+	// 			}else{
+	// 				unset($locationOffers[$j]);
+	// 			}
+	// 		}
+	// 		$j++;
+	// 	}
+	// 	}else{
+	// 		$locationOffers = array();
+	// 	}
+	//
+	// 	$filterArray= array();
+	// 	$g=0;
+	// 	if(!empty($locationOffers)){
+	// 		$filterArray[$g] = $locationOffers;
+	// 		$g++;
+	// 	}
+	// 	if(!empty($skillOffers)){
+	// 		$filterArray[$g] = $skillOffers;
+	// 		$g++;
+	// 	}
+	// 	if(!empty($typeOffers)){
+	// 		$filterArray[$g] = $typeOffers;
+	// 		$g++;
+	// 	}
+	//
+	// 	if($g == 3){
+	// 		$filteredOffer = array_intersect($filterArray[0], $filterArray[1], $filterArray[2]);
+	// 	}
+	// 	if($g == 2){
+	// 		$filteredOffer = array_intersect($filterArray[0], $filterArray[1]);
+	// 	}
+	// 	if($g == 1){
+	// 		$filteredOffer = $filterArray[0];
+	// 	}
+	// 	if($g == 0){
+	// 		$filteredOffer = array();
+	// 	}
+	//
+	//
+	// 	$j=0;
+	// 	foreach ($data['offers'] as $key => $offer) {
+	// 		if(!in_array($offer['offerID'], $filteredOffer)){
+	// 			unset($data['offers'][$j]);
+	// 		}
+	// 		$j++;
+	// 	}
+	// 	$offers = $data['offers'];
+	// 	if(!empty($offers)){
+	// 		foreach ($offers as $key => $offer) {
+	// 			if($offerSkills = $this->function_lib->getOfferSkills($offer['offerID']))
+	// 				$data['offerSkills'][$offer['offerID']] = $offerSkills;
+	// 			else
+	// 				$data['offerSkills'][$offer['offerID']] = array();
+	//
+	// 			if($offerLocations = $this->function_lib->getOfferLocations($offer['offerID']))
+	// 				$data['offerLocations'][$offer['offerID']] = $offerLocations;
+	// 			else{
+	// 				$data['offerLocations'][$offer['offerID']] = array();
+	// 			}
+	// 		}
+	// 		// var_dump($_SESSION['appliedFilters']);die;
+	// 		$_SESSION['filter'] = 1;
+	// 		$_SESSION['data'] = $data;
+	// 		$_SESSION['dataFilter'] = $data;
+	// 		$_SESSION['byParameter'] = 1;
+	// 		redirect(base_url('available-offers'));
+	// 	}else{
+	// 		$_SESSION['filter'] = 1;
+	// 		$_SESSION['data'] = $data;
+	// 		$_SESSION['dataFilter'] = $data;
+	// 		$_SESSION['byParameter'] = 1;
+	// 		redirect(base_url('available-offers'));
+	// 	}
+	//
+	// }
+	//
+	// public function clearOfferFilters(){
+	// 	if(isset($_SESSION['filter'])){
+	// 		unset($_SESSION['filter']);
+	// 	}
+	// 	if(isset($_SESSION['data'])){
+	// 		unset($_SESSION['data']);
+	// 	}
+	// 	if(isset($_SESSION['dataFilter'])){
+	// 		unset($_SESSION['dataFilter']);
+	// 	}
+	// 	if(isset($_SESSION['byParameter'])){
+	// 		unset($_SESSION['byParameter']);
+	// 	}
+	// 	redirect(base_url('available-offers'));
+	// }
+	//
+	// public function applyBothOfferFilters($status){
+	// 	$data['offers'] = $_SESSION['dataFilter']['offers'];
+	// 	$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
+	// 	if($status == 1){
+	// 		redirect(base_url('available-offers'));
+	// 	}else{
+	// 		$userSkills =  $this->skill_lib->getUserSkills($_SESSION['user_data']['userID']);
+	// 		$i=0;
+	// 		$skills = array();
+	// 		foreach ($userSkills as $key => $value) {
+	// 			$skills[$i] = $value['skillID'];
+	// 			$i++;
+	// 		}
+	// 		// var_dump($data);die;
+	// 		$j = 0;
+	// 		$data['userSkills'] = $skills;
+	// 		foreach ($data['offers'] as $key => $offer) {
+	// 			$offerSkills = $this->function_lib->getOfferSkills($offer['offerID']);
+	// 			$i = 0;
+	// 			$offerSkill = array();
+	// 			foreach ($offerSkills as $key => $value) {
+	// 				$offerSkill[$i] = $value['skillID'];
+	// 				$i++;
+	// 			}
+	// 			if(empty(array_intersect($offerSkill, $skills))){
+	// 				if(!empty($offerSkills))
+	// 				unset($data['offers'][$j]);
+	// 			}
+	// 			$j++;
+	// 		}
+	// 	}
+	// 	$data['status'] = $status;
+	// 	$offers = $data['offers'];
+	// 	if(!empty($offers)){
+	// 		foreach ($offers as $key => $offer) {
+	// 			if($offergetSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
+	// 				$data['offerSkills'][$offer['offerID']] = $offergetSkills;
+	// 			}
+	// 			else
+	// 				$data['offerSkills'][$offer['offerID']] = array();
+	//
+	// 			if($offergetLocations = $this->function_lib->getOfferLocations($offer['offerID']))
+	// 				$data['offerLocations'][$offer['offerID']] = $offergetLocations;
+	// 			else{
+	// 				$data['offerLocations'][$offer['offerID']] = array();
+	// 			}
+	// 		}
+	//
+	// 		$_SESSION['filter'] = 1;
+	// 		$_SESSION['data'] = $data;
+	// 		redirect(base_url('available-offers'));
+	// 	}else{
+	// 		$_SESSION['filter'] = 1;
+	// 		$_SESSION['data'] = $data;
+	// 		redirect(base_url('available-offers'));
+	// 	}
+	// }
+	//
+	// public function filterRelevantAvailable(){
+	// 	unset($_SESSION['filter']);
+	// 	unset($_SESSION['data']);
+	// 	$status = $this->input->get('status');
+	// 	if(isset($_SESSION['byParameter']) && $_SESSION['byParameter'] == 1){
+	// 		$this->applyBothOfferFilters($status);
+	// 	}
+	// 	$data['offers'] = $this->function_lib->getAllOffers(0, 10);
+	// 	$data['hasMore'] = $this->function_lib->hasMoreUserOffers(10, 10);
+	// 	if($status == 1){
+	// 		redirect(base_url('available-offers'));
+	// 	}else{
+	// 		$userSkills =  $this->skill_lib->getUserSkills($_SESSION['user_data']['userID']);
+	// 		$i=0;
+	// 		$skills = array();
+	// 		foreach ($userSkills as $key => $value) {
+	// 			$skills[$i] = $value['skillID'];
+	// 			$i++;
+	// 		}
+	// 		$j = 0;
+	// 		$data['userSkills'] = $skills;
+	// 		foreach ($data['offers'] as $key => $offer) {
+	// 			$offerSkills = $this->function_lib->getOfferSkills($offer['offerID']);
+	// 			$i = 0;
+	// 			foreach ($offerSkills as $key => $value) {
+	// 				$offerSkill[$i] = $value['skillID'];
+	// 				$i++;
+	// 			}
+	// 			if(empty(array_intersect($offerSkill, $skills))){
+	// 				if(!empty($offerSkills))
+	// 				unset($data['offers'][$j]);
+	// 			}
+	// 			$j++;
+	// 		}
+	// 	}
+	// 	$data['status'] = $status;
+	// 	$offers = $data['offers'];
+	// 	if(!empty($offers)){
+	// 		foreach ($offers as $key => $offer) {
+	// 			if($offergetSkills = $this->function_lib->getOfferSkills($offer['offerID'])){
+	// 				$data['offerSkills'][$offer['offerID']] = $offergetSkills;
+	// 			}
+	// 			else
+	// 				$data['offerSkills'][$offer['offerID']] = array();
+	//
+	// 			if($offergetLocations = $this->function_lib->getOfferLocations($offer['offerID']))
+	// 				$data['offerLocations'][$offer['offerID']] = $offergetLocations;
+	// 			else{
+	// 				$data['offerLocations'][$offer['offerID']] = array();
+	// 			}
+	// 		}
+	//
+	// 		$_SESSION['filter'] = 1;
+	// 		$_SESSION['data'] = $data;
+	// 		redirect(base_url('available-offers'));
+	// 	}else{
+	// 		$_SESSION['filter'] = 1;
+	// 		$_SESSION['data'] = $data;
+	// 		redirect(base_url('available-offers'));
+	// 	}
+	// }
 
 	public function resetPassword(){
 		$registeredEMail = "";

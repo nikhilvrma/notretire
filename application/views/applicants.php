@@ -186,29 +186,6 @@
                   </div>
                 </div>
               </div>
-
-              <div class="col-md-12 control-group form-group">
-                <div class="controls">
-                  <b>College(s)</b>
-                  <div style="margin-top: 10px;">
-                     <?php if(!empty($colleges)){ foreach($colleges as $college){ if(isset($college['instituteID'])){?>
-                    <div class="col-sm-12" style="font-size: 14px;"><input type="checkbox" name="colleges[]" value = "<?= $college['instituteID']?>" <?php if(isset($appliedFilters['colleges']) && $appliedFilters['colleges'] != '' && in_array($college['instituteID'] ,$appliedFilters['colleges'])){echo "checked";} ?>><label style="margin-left: 5px;"><?= $college['college']?></label></div>
-                    <?php }}}else{ echo "College Filter Not Applicable.";} ?>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-12 control-group form-group">
-                <div class="controls">
-                  <b>Courses</b>
-                  <div style="margin-top: 10px;">
-                    <?php if(!empty($courses)){ foreach($courses as $course){ if(isset($course['courseID'])){?>
-                    <div class="col-sm-12" style="font-size: 14px;"><input type="checkbox" name="courses[]" value = "<?= $course['courseID']?>" <?php if(isset($appliedFilters['courses']) && $appliedFilters['courses'] != '' && in_array($course['courseID'] ,$appliedFilters['courses'])){echo "checked";} ?>><label style="margin-left: 5px;"><?= $course['course']?></label></div>
-                    <?php }}}else{ echo "Course Filter Not Applicable.";} ?>
-                  </div>
-                </div>
-              </div>
-
               </div>
 
           </div>
