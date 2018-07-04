@@ -12,12 +12,12 @@
     <a href="<?php echo base_url('work-experience'); ?>" class="list-group-item sidebar-item <?php if($activePage=="5") { echo "sidebar-active"; } ?>">Work Experience</a>
     <a href="<?php echo base_url('user-profile'); ?>" class="list-group-item sidebar-item <?php if($activePage=="6") { echo "sidebar-active"; } ?>">User Profile</a>
 
-    <a class="list-group-item sidebar-item"><b style="float: right;">Job/Internship Offers</b></a>
+    <a class="list-group-item sidebar-item"><b style="float: right;">Job Offers</b></a>
     <a href="<?php echo base_url('available-offers'); ?>" class="list-group-item sidebar-item <?php if($activePage=="20") { echo "sidebar-active"; } ?>">Available Offer(s)</a>
     <a href="<?php echo base_url('applied-offers'); ?>" class="list-group-item sidebar-item <?php if($activePage=="10") { echo "sidebar-active"; } ?>">My Applied Offer(s)</a>
     <?php } ?>
     <?php if($_SESSION['user_data']['accountType']=='2') { ?>
-    <a class="list-group-item sidebar-item"><b style="float: right;">Job/Internship Offers</b></a>
+    <a class="list-group-item sidebar-item"><b style="float: right;">Job Offers</b></a>
     <a href="<?php echo base_url('my-added-offers'); ?>" class="list-group-item sidebar-item <?php if($activePage=="8") { echo "sidebar-active"; } ?>">My Added Offer(s)</a>
     <a href="<?php echo base_url('add-new-offer'); ?>" class="list-group-item sidebar-item <?php if($activePage=="9") { echo "sidebar-active"; } ?>">Add New Offer</a>
     <?php } ?>

@@ -181,7 +181,7 @@
           <center><h2 style="font-family: 'Kaushan Script';">About Not-Retire</h2></center>
 
           <center>
-            <p>about Not-Retire</p>
+            <p>about Not-Retire, need content</p>
           </center>
           </div>
 
@@ -206,7 +206,7 @@
             <center><h2 style="font-family: 'Kaushan Script'; margin-bottom: 20px;">Our Team</h2></center>
             <div class="row">
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-3 mb-4">
               <center>
                 <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
                 <br><br>
@@ -214,45 +214,31 @@
               </center>
             </div>
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-3 mb-4">
               <center>
-                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <img src="<?php echo base_url('assets/images/team/itishri.jpg'); ?>" style="border-radius: 50%; width: 50%;">
                 <br><br>
-                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+                <b>Itishri Singh</b><p style="font-size: 14px;">COO, CampusPuppy</p>
               </center>
             </div>
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-3 mb-4">
               <center>
-                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <img src="<?php echo base_url('assets/images/team/sahil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
                 <br><br>
-                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+                <b>Sahil Kumar Maurya</b><p style="font-size: 14px;">Tech-Lead, CampusPuppy</p>
               </center>
             </div>
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-3 mb-4">
               <center>
-                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
+                <img src="<?php echo base_url('assets/images/team/vandita.jpg'); ?>" style="border-radius: 50%; width: 50%;">
                 <br><br>
-                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
+                <b>Vandita</b><p style="font-size: 14px;">The Brains</p>
               </center>
             </div>
 
-            <div class="col-lg-2 mb-4">
-              <center>
-                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
-                <br><br>
-                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
-              </center>
-            </div>
 
-            <div class="col-lg-2 mb-4">
-              <center>
-                <img src="<?php echo base_url('assets/images/team/nikhil.jpg'); ?>" style="border-radius: 50%; width: 50%;">
-                <br><br>
-                <b>Nikhil Verma</b><p style="font-size: 14px;">CEO, CampusPuppy</p>
-              </center>
-            </div>
 
           </div>
 

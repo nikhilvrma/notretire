@@ -93,6 +93,11 @@ $route['employer/job-offers'] = 'home/jobOffers';
 $route['reset-password'] = 'home/resetPassword';
 
 
+$route['backoffice/users'] = 'backoffice/users';
+$route['backoffice/offers'] = 'backoffice/offers';
+$route['backoffice/change-password'] = 'backoffice/changePassword';
+
+
 $route['404'] = 'home/pageNotFound';
 
 $route['translate_uri_dashes'] = FALSE;
