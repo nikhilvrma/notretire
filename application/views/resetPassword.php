@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 
@@ -52,7 +52,7 @@
         <div class="card-body">
 
           <p style="font-size: 15px; margin-top: 15px;">
-            CampusPuppy is here to Help You. Forgot your Password. Don't Worry. Just Reset your Password Now.
+            Not Retire is here to Help You. Forgot your Password. Don't Worry. Just Reset your Password Now.
           </p>
 
           <form method="post" action="<?php echo base_url('functions/resetUserPassword'); ?>">

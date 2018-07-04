@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|Backoffice-CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 
@@ -44,12 +44,8 @@
 
               <div class="col-lg-12 mb-4">
               <div class="card">
-                <h6 class="card-header cardheader">CampusPuppy Resume Reference Number</h6>
                 <div class="card-body">
-                  <h1><?php echo $resumeReferenceNumber; ?></h1>
-                </div>
-                <div class="card-footer">
-                  <a href = "<?= base_url('report/'.$userID)?>" class="btn btn-primary" id="sendMessageButton" target= "_blank" style="float: right;"><i class="fa fa-download"></i> Download Resume</a>
+                  <a href = "<?= base_url('profile/'.$userID)?>" class="btn btn-primary" id="sendMessageButton" target= "_blank"><i class="fa fa-download"></i> Download User Profile</a>
                 </div>
               </div>
               </div>

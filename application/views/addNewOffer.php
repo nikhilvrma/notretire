@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 

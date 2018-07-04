@@ -209,7 +209,7 @@ class Functions extends CI_Controller {
 							$this->function_lib->insertCompanyData($userID);
 						}
 
-						$this->session->set_flashdata('message', array('content'=>'Thank You for registering on CampusPuppy. Login Now to Continue','color'=>'green'));
+						$this->session->set_flashdata('message', array('content'=>'Thank You for registering on Not Retire. Login Now to Continue','color'=>'green'));
 						redirect(base_url());
 					}
 					else{
@@ -254,7 +254,7 @@ class Functions extends CI_Controller {
 		);
 		$result = $this->function_lib->contactUs($data);
 		if($result){
-			$this->session->set_flashdata('message', array('content'=>'Thank You for connecting with us. CampusPuppy Team will get back to you soon.','color'=>'green'));
+			$this->session->set_flashdata('message', array('content'=>'Thank You for connecting with us. Not Retire Team will get back to you soon.','color'=>'green'));
 			redirect(base_url('contact-us'));
 		}
 		else{
@@ -311,12 +311,12 @@ class Functions extends CI_Controller {
 		}
 		if($scoreType == 1){
 			if(!($score >= 0.0 && $score <= 10.0)){
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','color'=>'red'));
+				$this->session->set_flashdata('message', array('content'=>'The range for CGPA scores is 0.0 to 10.0. Please enter score again.','color'=>'red'));
 				redirect(base_url('educational-details'));
 			}
 		}else{
 			if(!($score >= 0 && $score <= 100)){
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','color'=>'red'));
+				$this->session->set_flashdata('message', array('content'=>'The range for percentage Scores is 0 to 100. Please enter score again.','color'=>'red'));
 				redirect(base_url('educational-details'));
 			}
 		}
@@ -1246,7 +1246,7 @@ class Functions extends CI_Controller {
 					}
 					if($result2){
 						unset($_SESSION['redirect']);
-						$this->session->set_flashdata('message', array('content'=>'Offer added Successfully. Offer Will be approved By CampusPuppy team within 24 hrs.','color'=>'green'));
+						$this->session->set_flashdata('message', array('content'=>'Offer added Successfully. Offer Will be approved By Not Retire team within 24 hrs.','color'=>'green'));
 						if(isset($_POST['edit'])){
 							redirect(base_url('my-added-offers'));
 					}
@@ -1287,7 +1287,7 @@ class Functions extends CI_Controller {
 					}
 					if($result2){
 						unset($_SESSION['redirect']);
-						$this->session->set_flashdata('message', array('content'=>'Offer Edited Successfully. Offer Will be approved By CampusPuppy team within 24 hrs.','color'=>'green'));
+						$this->session->set_flashdata('message', array('content'=>'Offer Edited Successfully. Offer Will be approved By Not Retire team within 24 hrs.','color'=>'green'));
 						if(isset($_POST['edit'])){
 							redirect(base_url('my-added-offers'));
 					}
@@ -1966,7 +1966,7 @@ public function clearFilters($offerID){
 			redirect(base_url('reset-password?email='.$registeredEMail));
 		}
 		else{
-			$this->session->set_flashdata('message', array('content'=>'You are not registered with CampusPuppy. Register a Account today.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'You are not registered with Not Retire. Register a Account today.','color'=>'red'));
 			redirect(base_url());
 		}
 	}
@@ -1982,7 +1982,7 @@ public function clearFilters($offerID){
 			redirect(base_url('reset-password?email='.$email));
 		}
 		else{
-			$this->session->set_flashdata('message', array('content'=>'You are not registered with CampusPuppy. Register a Account today.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'You are not registered with Not Retire. Register a Account today.','color'=>'red'));
 			redirect(base_url());
 		}
 	}
@@ -2080,7 +2080,7 @@ public function clearFilters($offerID){
 		$data = array(
 				'sendToEmail' => $email,
 				'fromName' => 'Campus Puppy Private Limited',
-				'fromEmail' => 'no-reply@campuspuppy.com',
+				'fromEmail' => 'no-reply@notretire.com',
 				'subject' => 'Reset Password|Campus Puppy Private Limited',
 				'message' => $message,
 				'using' =>'pepipost'

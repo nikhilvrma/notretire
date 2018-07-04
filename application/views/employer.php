@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|Backoffice-CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 
@@ -116,13 +116,13 @@
             <div class="card-body">
               <center><img style="width: 70%;" src="<?php echo base_url('assets/images/cp_logo.png'); ?>"></center>
               <p><b>About Us</b></p>
-              <p class="card-text" style="font-size: 14px; text-align: justify; text-justify: inter-word;">Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual’s specific skill set and expertise in it. Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what’s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p>
+              <p class="card-text" style="font-size: 14px; text-align: justify; text-justify: inter-word;">Eradicating the gap between employers and potential candidates, we, at Not Retire, consider it a need in this era to connect an individual with a company, based on the individual’s specific skill set and expertise in it. Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what’s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p>
               <p><b>Website</b></p>
-              <p class="card-text" style="font-size: 14px;"><a>http://www.campuspuppy.com/</a></p>
+              <p class="card-text" style="font-size: 14px;"><a>http://www.notretire.com/</a></p>
               <p><b>Location</b></p>
               <p class="card-text" style="font-size: 14px;">New Delhi</p>
               <p><b>Contact Details</b></p>
-              <p class="card-text" style="font-size: 14px;">hello@campuspuppy.com<br>+91-7503705892</p>
+              <p class="card-text" style="font-size: 14px;">hello@notretire.com<br>+91-7503705892</p>
             </div>
           </div>
 

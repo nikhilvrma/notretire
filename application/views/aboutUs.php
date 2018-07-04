@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 
@@ -51,7 +51,7 @@
           <hr>
           <iframe width="100%" height="500px" src="https://www.youtube.com/embed/RWQysw51ktU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           <p style="font-size: 15px; margin-top: 15px;">
-            CampusPuppy helps in eradicating the gap between employers and potential candidates, we, consider it a need in this era to connect an individual with a company, based on the individual’s specific skill set and expertise in it. Linking together a social community, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. The professionally socialized environment created by CampusPuppy allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.
+            Not Retire helps in eradicating the gap between employers and potential candidates, we, consider it a need in this era to connect an individual with a company, based on the individual’s specific skill set and expertise in it. Linking together a social community, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. The professionally socialized environment created by Not Retire allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.
           </p>
           <p><b>What do we do?</b></p>
           <p>
