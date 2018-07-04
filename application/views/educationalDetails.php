@@ -128,14 +128,6 @@
                           </div>
                         </div>
 
-                        <div class="col-md-12 control-group form-group">
-                          <div class="controls">
-                            <label>Supporting Document:</label>
-                            <input type="file" class="form-control" name = "file" id ="file" placeholder="Score">
-                            <p class="help-block" style="color: red; font-size: 13px;">Upload your Board Certificate/University Degree, to verify the Educational Record.</p>
-                          </div>
-                        </div>
-
                         <div class="col-md-12 control-group form-group schoolData">
                           <div class="controls">
                             <label>School/Education Board:</label>
