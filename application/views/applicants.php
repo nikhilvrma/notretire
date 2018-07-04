@@ -90,12 +90,11 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 mb-4">
-
+                      <p class="card-text"><b>Location: </b><?= $applicant['city'].', '. $applicant['state']?></p>
+                      <p class="card-text"><b>Gender: </b><?php if($applicant['gender'] == 'M'){echo "Male";}else if($applicant['gender'] == 'F'){echo "Female";}else{echo "Gender Not Found.";}?></p>
                     </div>
                     <div class="col-md-6 mb-4">
                       <p class="card-text"><b>Status: </b><label class = "status" id = "status<?= $applicant['userID']?>"><?php if($applicant['status'] == 1){echo "<b>Applied</b>";}else if($applicant['status'] == 2){echo "<b style = 'color:green'>Selected</b>";}else if($applicant['status'] == 3){echo "<b style = 'color:yellow'>Shortlisted</b>";}else{echo "<b style = 'color:red'>Rejected</b>";}?></label></p>
-                      <p class="card-text"><b>Gender: </b><?php if($applicant['gender'] == 'M'){echo "Male";}else if($applicant['gender'] == 'F'){echo "Female";}else{echo "Gender Not Found.";}?></p>
-                      <p class="card-text"><b>Location: </b><?= $applicant['city'].', '. $applicant['state']?></p>
                     </div>
                     <div class="col-md-12 mb-4">
                       <p class="card-text"><b>E-Mail Address: </b><label class = "email" id = "email<?= $applicant['userID']?>"><?php if($applicant['status'] == 3 || $applicant['status'] == 2){echo $applicant['email'];}else{?><i>Short-List Applicant to unlock E-Mail Address</i><?php } ?></label></p>
