@@ -42,13 +42,7 @@
 
             <div class="row">
 
-              <div class="col-md-4 control-group form-group openings">
-                <div class="controls">
-                  <label><b>Number of Openings:</b></label>
-                  <input type="number" placeholder="Number of Opening(s)" class="form-control" required name="openings" <?php if(isset($redirect)){ echo "value = ".$redirect['openings'];}?>>
-                  <p class="help-block"></p>
-                </div>
-              </div>
+
 
               <div class="col-md-12 control-group form-group">
                 <div class="controls">
@@ -68,7 +62,15 @@
                 </div>
               </div>
 
-              <div class="col-md-4 control-group form-group">
+              <div class="col-md-3 control-group form-group openings">
+                <div class="controls">
+                  <label><b>Number of Openings:</b></label>
+                  <input type="number" placeholder="Number of Opening(s)" class="form-control" required name="openings" <?php if(isset($redirect)){ echo "value = ".$redirect['openings'];}?>>
+                  <p class="help-block"></p>
+                </div>
+              </div>
+
+              <div class="col-md-3 control-group form-group">
                 <div class="controls">
                   <label><b>Joining Date:</b></label>
                   <input type="date" class="form-control" required name="joiningDate" <?php if(isset($redirect)){ echo "value = ".$redirect['joiningDate'];}?>>
@@ -76,7 +78,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 control-group form-group">
+              <div class="col-md-3 control-group form-group">
                 <div class="controls">
                   <label><b>Application Deadline:</b></label>
                   <input type="date" class="form-control" required name="applicationDeadline" <?php if(isset($redirect)){ echo "value = ".$redirect['applicationDeadline'];}?>>
@@ -84,7 +86,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 control-group form-group">
+              <div class="col-md-3 control-group form-group">
                <div class="controls">
                  <label><b>Work From Home:</b></label>
                  <select class="form-control" name="workHome" id="workHome" required>
