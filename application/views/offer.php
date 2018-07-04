@@ -12,7 +12,7 @@
 
     <?php echo $headerFiles; ?>
 
-    <meta property="og:url"                content="<?= base_url('offers/'.$offerDetails[0]['offerID'])?>" />
+    <meta property="og:url"                content="<?= base_url('offer/'.$offerDetails[0]['offerID'])?>" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="<?= $offerDetails[0]['offerTitle']?>" />
     <?php
@@ -138,8 +138,8 @@
                         <?php if($offerDetails[0]['active'] == 1 && $offerDetails[0]['approved'] == 1){?>
                         <p class="card-text" style="margin-top: 15px;"><b>Share: </b></p>
                         <p class="card-text" style="margin-top: 40px;">
-                          <a href="https://www.facebook.com/sharer/sharer.php?u=<?= base_url('offers/'.$offerDetails[0]['offerID'])?>" target="_blank" class="btn" style="color: white; background: #3b5998;"><i class="fa fa-facebook"></i></a>
-                          <a href="https://twitter.com/intent/tweet?url=<?= base_url('offers/'.$offerDetails[0]['offerID'])?>" class="btn" style="color: white; background: #1DA1F2;"><i class="fa fa-twitter"></i></a>
+                          <a href="https://www.facebook.com/sharer/sharer.php?u=<?= base_url('offer/'.$offerDetails[0]['offerID'])?>" target="_blank" class="btn" style="color: white; background: #3b5998;"><i class="fa fa-facebook"></i></a>
+                          <a href="https://twitter.com/intent/tweet?url=<?= base_url('offer/'.$offerDetails[0]['offerID'])?>" class="btn" style="color: white; background: #1DA1F2;"><i class="fa fa-twitter"></i></a>
                         </p>
                       <?php } ?>
 
