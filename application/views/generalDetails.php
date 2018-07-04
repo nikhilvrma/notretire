@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="<?php echo base_url('/assets/css/croppie.css'); ?>" rel="stylesheet">
-    <title><?php echo $pageTitle."|Backoffice-CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 

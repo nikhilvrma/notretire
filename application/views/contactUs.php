@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 
@@ -53,7 +53,7 @@
           <div class="row">
 
             <div class="col-md-6 control-group form-group">
-                <p><b>E-Mail: </b>hello@campuspuppy.com</p>
+                <p><b>E-Mail: </b>hello@notretire.com</p>
                 <p><b>Mobile: </b>+91-7503705892</p>
                 <p><b>Registerd Office: </b>Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi</p>
                 <p><b>Office Address: </b>Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi</p>

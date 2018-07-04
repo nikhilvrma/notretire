@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $pageTitle."|CampusPuppy"; ?></title>
+    <title><?php echo $pageTitle."|Not Retire"; ?></title>
 
     <?php echo $headerFiles; ?>
 
@@ -135,7 +135,6 @@
                         <center><img src="<?php echo base_url().$employerDetails['companyLogo']; ?>" style="width: 80%;">
                         <p class="card-text"><b><?= $employerDetails['companyName']?></b></p>
                         </center>
-                        <!-- <p class="card-text"><b>Website: </b>http://www.campuspuppy.com/</p> -->
                         <?php if($offerDetails[0]['active'] == 1 && $offerDetails[0]['approved'] == 1){?>
                         <p class="card-text" style="margin-top: 15px;"><b>Share: </b></p>
                         <p class="card-text" style="margin-top: 40px;">

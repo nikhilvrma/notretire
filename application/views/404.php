@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>404-Page Not Found|CampusPuppy</title>
+    <title>404-Page Not Found|Not Retire</title>
 
     <?php echo $headerFiles; ?>
 
