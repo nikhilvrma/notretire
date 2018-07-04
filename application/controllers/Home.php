@@ -31,7 +31,7 @@ class Home extends CI_Controller {
 			redirect(base_url('general-details'));
 		}
 		else{
-			$this->data['pageTitle'] = "CampusPuppy";
+			$this->data['pageTitle'] = "Not Retire";
 			$this->load->view('home', $this->data);
 		}
 	}
@@ -625,7 +625,7 @@ class Home extends CI_Controller {
 		$data = array(
 				'sendToEmail' => $email,
 				'fromName' => 'Campus Puppy Private Limited',
-				'fromEmail' => 'no-reply@campuspuppy.com',
+				'fromEmail' => 'no-reply@notretire.com',
 				'subject' => 'Offers|Campus Puppy Private Limited',
 				'message' => $message,
 				'using' =>'pepipost'
