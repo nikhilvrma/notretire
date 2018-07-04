@@ -311,12 +311,12 @@ class Functions extends CI_Controller {
 		}
 		if($scoreType == 1){
 			if(!($score >= 0.0 && $score <= 10.0)){
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','color'=>'red'));
+				$this->session->set_flashdata('message', array('content'=>'The range for CGPA scores is 0.0 to 10.0. Please enter score again.','color'=>'red'));
 				redirect(base_url('educational-details'));
 			}
 		}else{
 			if(!($score >= 0 && $score <= 100)){
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','color'=>'red'));
+				$this->session->set_flashdata('message', array('content'=>'The range for percentage Scores is 0 to 100. Please enter score again.','color'=>'red'));
 				redirect(base_url('educational-details'));
 			}
 		}
