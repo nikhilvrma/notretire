@@ -67,7 +67,7 @@ $route['educational-details'] = 'home/educationalDetails';
 $route['verify-contact-details'] = 'home/verifyContactDetails';
 
 $route['work-experience'] = 'home/workExperience';
-$route['resume'] = 'home/resume';
+$route['user-profile'] = 'home/resume';
 
 $route['change-password'] = 'home/changePassword';
 
@@ -86,7 +86,7 @@ $route['hiring-nucleus/compare-applicants'] = 'home/compareApplicants';
 $route['hiring-nucleus/profile/(:num)/(:num)'] = 'home/profile/$1/$2';
 
 $route['employer'] = 'home/employer';
-$route['report/(:num)'] = 'home/report/$1';
+$route['profile/(:num)'] = 'home/report/$1';
 
 $route['employer/job-offers'] = 'home/jobOffers';
 

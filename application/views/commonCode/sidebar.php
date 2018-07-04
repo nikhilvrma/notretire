@@ -10,7 +10,7 @@
     <?php if($_SESSION['user_data']['accountType']=='1') { ?>
     <a href="<?php echo base_url('educational-details'); ?>" class="list-group-item sidebar-item <?php if($activePage=="4") { echo "sidebar-active"; } ?>">Educational Details</a>
     <a href="<?php echo base_url('work-experience'); ?>" class="list-group-item sidebar-item <?php if($activePage=="5") { echo "sidebar-active"; } ?>">Work Experience</a>
-    <a href="<?php echo base_url('resume'); ?>" class="list-group-item sidebar-item <?php if($activePage=="6") { echo "sidebar-active"; } ?>">Resume</a>
+    <a href="<?php echo base_url('user-profile'); ?>" class="list-group-item sidebar-item <?php if($activePage=="6") { echo "sidebar-active"; } ?>">User Profile</a>
 
     <a class="list-group-item sidebar-item"><b style="float: right;">Job/Internship Offers</b></a>
     <a href="<?php echo base_url('available-offers'); ?>" class="list-group-item sidebar-item <?php if($activePage=="20") { echo "sidebar-active"; } ?>">Available Offer(s)</a>
