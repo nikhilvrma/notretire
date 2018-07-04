@@ -338,31 +338,11 @@ class Functions extends CI_Controller {
 				redirect(base_url('educational-details'));
 		}else{
 			if(isset($_POST['edit']) && $_POST['edit'] == 1){
-				$config['upload_path'] = 'assets/uploads/EducationalDocuments';
-			 	$config['allowed_types'] = 'pdf';
-			 	$config['max_size']	= '3000';
-			 	$this->load->library('upload', $config);
-			 	$result = $this->upload->do_upload('file');
-			 	$x = $this->upload->data();
-			 	$error = $this->upload->display_errors();
-				$base_url = base_url();
-				$fileName = $base_url.'assets/uploads/EducationalDocuments/'.$x['file_name'];
 				if($type == 1 || $type == 2){
 				if($board == ''){
 					$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
 					redirect(base_url('educational-details'));
 				}
-				if($error == ''){
-					$data = array(
-						'userID' => $_SESSION['user_data']['userID'],
-						'educationType' => $type,
-						'year' => $year,
-						'score' => $score,
-						'scoreType' => $scoreType,
-						'institute' => $board,
-						'supportingDocument' => $fileName
-					);
-				}else{
 					$data = array(
 						'userID' => $_SESSION['user_data']['userID'],
 						'educationType' => $type,
@@ -372,7 +352,6 @@ class Functions extends CI_Controller {
 						'institute' => $board
 					);
 				}
-			}
 			// var_dump($other);die;
 			if($type == 3){
 				if($other != 1){
@@ -395,18 +374,7 @@ class Functions extends CI_Controller {
 						$college = $this->function_lib->getCollegeID($newCollege);
 					}
 
-				if($error == ''){
-				$data = array(
-				'userID' => $_SESSION['user_data']['userID'],
-				'educationType' => $type,
-				'year' => $year,
-				'score' => $score,
-				'scoreType' => $scoreType,
-				'instituteID' => $college,
-				'courseID' => $courseBach,
-				'supportingDocument' => $fileName
-				);
-				}else{
+
 					$data = array(
 				'userID' => $_SESSION['user_data']['userID'],
 				'educationType' => $type,
@@ -416,7 +384,6 @@ class Functions extends CI_Controller {
 				'instituteID' => $college,
 				'courseID' => $courseBach
 				);
-				}
 			}
 			if($type == 4){
 				if($other != 1){
@@ -438,19 +405,6 @@ class Functions extends CI_Controller {
 						$this->function_lib->insertCollege($data);
 						$college = $this->function_lib->getCollegeID($newCollege);
 					}
-
-				if($error == ''){
-				$data = array(
-				'userID' => $_SESSION['user_data']['userID'],
-				'educationType' => $type,
-				'year' => $year,
-				'score' => $score,
-				'scoreType' => $scoreType,
-				'instituteID' => $college,
-				'courseID' => $courseMast,
-				'supportingDocument' => $fileName
-				);
-			}else{
 				$data = array(
 				'userID' => $_SESSION['user_data']['userID'],
 				'educationType' => $type,
@@ -461,7 +415,6 @@ class Functions extends CI_Controller {
 				'courseID' => $courseMast
 				);
 			}
-			}
 				if($this->function_lib->updateEducation($data, $_POST['id'])){
 					$this->session->set_flashdata('message', array('content'=>'Education Added Successfully.','color'=>'green'));
 					redirect(base_url('educational-details'));
@@ -470,31 +423,11 @@ class Functions extends CI_Controller {
 					redirect(base_url('educational-details'));
 				}
 			}else{
-			$config['upload_path'] = 'assets/uploads/EducationalDocuments';
-		 	$config['allowed_types'] = 'pdf';
-		 	$config['max_size']	= '3000';
-		 	$this->load->library('upload', $config);
-		 	$result = $this->upload->do_upload('file');
-		 	$x = $this->upload->data();
-		 	$error = $this->upload->display_errors();
-			$base_url = base_url();
-			$fileName = $base_url.'assets/uploads/EducationalDocuments/'.$x['file_name'];
 			if($type == 1 || $type == 2){
 				if($board == ''){
 					$this->session->set_flashdata('message', array('content'=>'Incomplete Data Inputted.','color'=>'red'));
 					redirect(base_url('educational-details'));
 				}
-				if($error == ''){
-					$data = array(
-						'userID' => $_SESSION['user_data']['userID'],
-						'educationType' => $type,
-						'year' => $year,
-						'score' => $score,
-						'scoreType' => $scoreType,
-						'institute' => $board,
-						'supportingDocument' => $fileName
-					);
-				}else{
 					$data = array(
 						'userID' => $_SESSION['user_data']['userID'],
 						'educationType' => $type,
@@ -503,7 +436,6 @@ class Functions extends CI_Controller {
 						'scoreType' => $scoreType,
 						'institute' => $board
 					);
-				}
 			}
 
 			if($type == 3){
@@ -526,18 +458,6 @@ class Functions extends CI_Controller {
 						$this->function_lib->insertCollege($data);
 						$college = $this->function_lib->getCollegeID($newCollege);
 					}
-				if($error == ''){
-				$data = array(
-				'userID' => $_SESSION['user_data']['userID'],
-				'educationType' => $type,
-				'year' => $year,
-				'score' => $score,
-				'scoreType' => $scoreType,
-				'instituteID' => $college,
-				'courseID' => $courseBach,
-				'supportingDocument' => $fileName
-				);
-				}else{
 					$data = array(
 				'userID' => $_SESSION['user_data']['userID'],
 				'educationType' => $type,
@@ -547,7 +467,6 @@ class Functions extends CI_Controller {
 				'instituteID' => $college,
 				'courseID' => $courseBach
 				);
-				}
 			}
 			if($type == 4){
 				if($other != 1){
@@ -569,18 +488,6 @@ class Functions extends CI_Controller {
 						$this->function_lib->insertCollege($data);
 						$college = $this->function_lib->getCollegeID($newCollege);
 					}
-				if($error == ''){
-				$data = array(
-				'userID' => $_SESSION['user_data']['userID'],
-				'educationType' => $type,
-				'year' => $year,
-				'score' => $score,
-				'scoreType' => $scoreType,
-				'instituteID' => $college,
-				'courseID' => $courseMast,
-				'supportingDocument' => $fileName
-				);
-			}else{
 				$data = array(
 				'userID' => $_SESSION['user_data']['userID'],
 				'educationType' => $type,
@@ -590,7 +497,6 @@ class Functions extends CI_Controller {
 				'instituteID' => $college,
 				'courseID' => $courseMast
 				);
-			}
 			}
 			if($this->function_lib->addEducation($data)){
 				$this->session->set_flashdata('message', array('content'=>'Education Added Successfully.','color'=>'green'));
@@ -671,30 +577,7 @@ class Functions extends CI_Controller {
 		}
 
 		if(isset($_POST['edit']) && $_POST['edit'] == 1){
-			$config['upload_path'] = 'assets/uploads/WorkExperience';
-		 	$config['allowed_types'] = 'pdf';
-		 	$config['max_size']	= '3000';
-		 	$this->load->library('upload', $config);
-		 	$result = $this->upload->do_upload('file');
-		 	$x = $this->upload->data();
-		 	$error = $this->upload->display_errors();
-			$base_url = base_url();
-			$fileName = $base_url.'assets/uploads/WorkExperience/'.$x['file_name'];
-			if($error == ''){
-			$data = array(
-				'userID' => $_SESSION['user_data']['userID'],
-				'companyName' => $companyName,
-				'position' => $position,
-				'role' => $role,
-				'startYear' => $startYear,
-				'startMonth' => $startMonth,
-				'endYear' => $endYear,
-				'endMonth' => $endMonth,
-				'experienceAs' => $experienceAs,
-				'currentlyWorking' => $currentWorking,
-				'supportingDocument' => $fileName
-			);
-			}else{
+
 				$data = array(
 				'userID' => $_SESSION['user_data']['userID'],
 				'companyName' => $companyName,
@@ -707,7 +590,6 @@ class Functions extends CI_Controller {
 				'experienceAs' => $experienceAs,
 				'currentlyWorking' => $currentWorking,
 			);
-			}
 			if($this->function_lib->updateWorkExperience($data, $_POST['id'])){
 				$this->session->set_flashdata('message', array('content'=>'Work Experience Added Successfully.','color'=>'green'));
 				redirect(base_url('work-experience'));
@@ -716,16 +598,6 @@ class Functions extends CI_Controller {
 				redirect(base_url('work-experience'));
 			}
 		}else{
-			$config['upload_path'] = 'assets/uploads/WorkExperience';
-		 	$config['allowed_types'] = 'pdf';
-		 	$config['max_size']	= '3000';
-		 	$this->load->library('upload', $config);
-		 	$result = $this->upload->do_upload('file');
-		 	$x = $this->upload->data();
-		 	$error = $this->upload->display_errors();
-			$base_url = base_url();
-			$fileName = $base_url.'assets/uploads/WorkExperience/'.$x['file_name'];
-
 			$data = array(
 				'userID' => $_SESSION['user_data']['userID'],
 				'companyName' => $companyName,
@@ -736,8 +608,7 @@ class Functions extends CI_Controller {
 				'endYear' => $endYear,
 				'endMonth' => $endMonth,
 				'experienceAs' => $experienceAs,
-				'currentlyWorking' => $currentWorking,
-				'supportingDocument' => $fileName
+				'currentlyWorking' => $currentWorking
 			);
 
 			if($this->function_lib->addWorkExperience($data, $_POST['id'])){

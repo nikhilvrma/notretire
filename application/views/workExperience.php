@@ -196,17 +196,6 @@
                         </div>
                         </div>
 
-
-                        <div class="row">
-                        <div class="col-md-12 control-group form-group">
-                          <div class="controls">
-                            <label>Supporting Document:</label>
-                            <input type="file" class="form-control" name = "file" id ="file" placeholder="Score">
-                            <p class="help-block" style="color: red; font-size: 13px;">Upload your Work Certificate, to verify the Work Experience.</p>
-                          </div>
-                        </div>
-                        </div>
-
                          <div class = "hiddenInput">
 
                         </div>
@@ -222,17 +211,9 @@
                   </div>
                 </div>
               </div>
-
-
-
-
-
             </div>
-
-
         </div>
       </div>
-
     </div>
 
     <?php echo $footer; ?>
