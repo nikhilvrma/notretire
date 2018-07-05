@@ -52,26 +52,27 @@
             <li class="breadcrumb-item active">About</li>
           </ol>
 
-          <h4 class="mt-4 mb-3"><b>Users</b></h4>
+          <h4 class="mt-4 mb-3"><b>Backoffice login</b></h4>
 
 
-          <form>
+          <form action = "<?= base_url('backoffice/login')?>" method="POST">
             <div class="form-group row">
               <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                <input type="text" class="form-control" id="inputUsername" name = "username" placeholder="Username">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
               <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                <input type="password" class="form-control" id="inputPassword" name = "password" placeholder="Password">
               </div>
             </div>
 
 
             <div class="form-group row">
               <div class="col-sm-12">
+                <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
                 <button type="submit" class="btn btn-primary" style="float: right;">Sign in</button>
               </div>
             </div>
