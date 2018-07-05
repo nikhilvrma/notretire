@@ -58,8 +58,8 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item sidebar-item">Users</a>
-            <a href="about.html" class="list-group-item sidebar-item sidebar-active">Offers</a>
+            <a href="<?= base_url('backoffice/users')?>" class="list-group-item sidebar-item sidebar-active">Users</a>
+            <a href="<?= base_url('backoffice/offers')?>" class="list-group-item sidebar-item">Offers</a>
           </div>
         </div>
         <!-- Content Column -->

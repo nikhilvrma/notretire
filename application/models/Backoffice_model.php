@@ -42,7 +42,7 @@ class Backoffice_model extends CI_Model {
 	}
 
   public function getUserDataFromID($userID){
-    $result = $this->db->get_where('adminAuth', array('userID' => $userID));
+    $result = $this->db->get_where('users', array('userID' => $userID));
     return $result->result_array();
   }
 
