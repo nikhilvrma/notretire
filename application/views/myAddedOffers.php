@@ -56,7 +56,7 @@
                     <div class="col-md-6 mb-4">
 
                       <p class="card-text"><b>Joining Date: </b><?= date_format(date_create($offer['joiningDate']), 'd-F-Y')?></p>
-                      <p class="card-text"><b>Status: </b><?php date_default_timezone_set("Asia/Kolkata");$date = strtotime($offer['applicationDeadline']);$timestamp = time();if($date<=$timestamp){echo "<b style = 'color:red'>Expired</b>";}else if($offer['approved'] == 0){echo "<b>Approval Pending</b>";}else if($offer['approved'] == 1){echo "<b style = 'color:green'>Accepted</b>";}else{echo "<b style = 'color:red'>Rejected</b>";}?></p>
+                      <p class="card-text"><b>Status: </b><?php date_default_timezone_set("Asia/Kolkata");$date = strtotime($offer['applicationDeadline']);$timestamp = time(); $timestamp = date(Y-m-d, $timestamp) ;if($date<$timestamp){echo "<b style = 'color:red'>Expired</b>";}else if($offer['approved'] == 0){echo "<b>Approval Pending</b>";}else if($offer['approved'] == 1){echo "<b style = 'color:green'>Accepted</b>";}else{echo "<b style = 'color:red'>Rejected</b>";}?></p>
                         <?php if($offer['approved'] == 2){?>
                           <p class="card-text"><b>Remarks: </b><?php if($offer['rejectMessage'] == ''){echo "None.";}else{echo $offer['rejectMessage'];}?></p>
                         <?php } ?>
