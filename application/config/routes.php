@@ -92,7 +92,7 @@ $route['employer/job-offers'] = 'home/jobOffers';
 
 $route['reset-password'] = 'home/resetPassword';
 
-
+$route['backoffice'] = 'backoffice';
 $route['backoffice/users'] = 'backoffice/users';
 $route['backoffice/offers'] = 'backoffice/offers';
 $route['backoffice/change-password'] = 'backoffice/changePassword';
