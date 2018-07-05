@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Offer|Not Retire"; ?></title>
+    <title>Offer|Not Retire</title>
 
     <link href="<?php echo base_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/backoffice.css'); ?>" rel="stylesheet">

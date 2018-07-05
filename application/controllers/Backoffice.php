@@ -21,6 +21,7 @@ class Backoffice extends CI_Controller {
 	}
 	public function users(){
 		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['users'] = $this->backoffice_lib->getAllUsersData();
@@ -29,6 +30,7 @@ class Backoffice extends CI_Controller {
 
 	public function offers(){
 		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['offers'] = $this->backoffice_lib->getAllOffers();
@@ -38,6 +40,7 @@ class Backoffice extends CI_Controller {
 
 	public function viewOfferDetails($offerID){
 		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['offerDetails'] = $this->function_lib->getOfferDetails($offerID);
@@ -50,13 +53,25 @@ class Backoffice extends CI_Controller {
 		else{
 			$this->data['getOfferLocationsations'] = array();
 		}
-
-
 		$this->load->view('backoffice/offer', $this->data);
 	}
 
+
+	public function viewUserDetails($userID){
+		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			redirect(base_url('backoffice'));
+		}
+		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
+		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
+		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
+		$this->load->view('report', $this->data);
+	}
+
+
 	public function changePassword(){
 		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->load->view('backoffice/changePassword', $this->data);
