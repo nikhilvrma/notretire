@@ -53,4 +53,22 @@ class Backoffice_lib {
     $CI->load->model('backoffice_model','backoffice');
     return $CI->backoffice->getAllUsersData();
   }
+
+  public function getAllOffers(){
+    $CI = &get_instance();
+    $CI->load->model('backoffice_model','backoffice');
+    return $CI->backoffice->getAllOffers();
+  }
+
+  public function approveOffer($offerID){
+    $CI = &get_instance();
+    $CI->load->model('backoffice_model','backoffice');
+    return $CI->backoffice->approveOffer($offerID);
+  }
+
+  public function rejectOffer($offerID, $remark){
+    $CI = &get_instance();
+    $CI->load->model('backoffice_model','backoffice');
+    return $CI->backoffice->rejectOffer($offerID, $remark);
+  }
 }

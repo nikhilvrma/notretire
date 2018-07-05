@@ -5,7 +5,7 @@ class Backoffice extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->library(array('session', 'backoffice_lib'));
+		$this->load->library(array('session', 'backoffice_lib', 'function_lib'));
 		$this->load->helper(array('url'));
 		$this->data = array();
 		$this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
@@ -31,7 +31,28 @@ class Backoffice extends CI_Controller {
 		if(!$this->backoffice_lib->auth()){
 			redirect(base_url('backoffice'));
 		}
+		$this->data['offers'] = $this->backoffice_lib->getAllOffers();
 		$this->load->view('backoffice/offers', $this->data);
+	}
+
+
+	public function viewOfferDetails($offerID){
+		if(!$this->backoffice_lib->auth()){
+			redirect(base_url('backoffice'));
+		}
+		$this->data['offerDetails'] = $this->function_lib->getOfferDetails($offerID);
+		$this->data['employerDetails'] = $this->function_lib->getCompanyData($this->data['offerDetails'][0]['addedBy']);
+		if(empty($this->function_lib->getOfferDetails($offerID))){
+			redirect(base_url('404'));
+		}
+		if($offerLocations = $this->function_lib->getOfferLocations($offerID))
+			$this->data['offerLocations'] = $offerLocations;
+		else{
+			$this->data['getOfferLocationsations'] = array();
+		}
+
+
+		$this->load->view('backoffice/offer', $this->data);
 	}
 
 	public function changePassword(){
@@ -83,6 +104,10 @@ class Backoffice extends CI_Controller {
 	}
 
 	public function setNewPassword(){
+		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			redirect(base_url('backoffice'));
+		}
 		$currentPassword = '';
 		$newPassword = '';
 		$confirmNewPassword = '';
@@ -123,6 +148,33 @@ class Backoffice extends CI_Controller {
 		}
 	}
 
+	public function approveOffer($offerID){
+		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			echo "false"; die;
+		}
+		if($this->backoffice_lib->approveOffer($offerID)){
+			$this->session->set_flashdata('message', array('content'=>'The offer has been successfully approved.','color'=>'green'));
+			echo "true"; die;
+		}else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong, Please Try Again.','color'=>'red'));
+			echo "false"; die;
+		}
+	}
 
+	public function rejectOffer($offerID){
+		if(!$this->backoffice_lib->auth()){
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			echo "false"; die;
+		}
+		$remark = $this->input->get('remark');
+		if($this->backoffice_lib->rejectOffer($offerID, $remark)){
+			$this->session->set_flashdata('message', array('content'=>'The offer has been successfully rejected.','color'=>'green'));
+			echo 'true'; die;
+		}else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong, Please Try Again.','color'=>'red'));
+			echo 'false'; die;
+		}
+	}
 
 }

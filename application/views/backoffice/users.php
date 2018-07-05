@@ -88,7 +88,7 @@
               <tbody>
                 <?php $i = 1; foreach($users as $user){?>
                   <tr>
-                      <td><?= $i?></td>
+                      <td><?= $i?>.</td>
                       <td><?= $user['name']?></td>
                       <td><b>E-Mail: </b><?= $user['email']?><br><b>Mobile: </b>+91-<?= $user['mobile']?></td>
                       <td><?php if($user['accountType'] == 1){echo "General User";}else{echo "Employer";}?></td>

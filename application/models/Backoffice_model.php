@@ -52,4 +52,27 @@ class Backoffice_model extends CI_Model {
     return $result;
   }
 
+  public function getAllOffers(){
+    $this->db->select('offerID, offerTitle, approved');
+    $result = $this->db->get('offers')->result_array();
+    return $result;
+  }
+
+  public function approveOffer($offerID){
+    $this->db->set('approved', 1);
+    $this->db->where('offerID', $offerID);
+    $result = $this->db->update('offers');
+    return $result;
+  }
+
+  public function rejectOffer($offerID, $remark){
+    $data = array(
+    'approved' => 2,
+    'remark' => $remark
+    );
+    $this->db->where('offerID', $offerID);
+    $result = $this->db->update('offers', $data);
+    return $result;
+  }
+
 }

@@ -86,14 +86,15 @@
               </thead>
 
               <tbody>
+                  <?php $i = 1; foreach($offers as $offer){?>
                   <tr>
-                      <td>1.</td>
-                      <td>This is Test Offer Title</td>
-                      <td><a class="btn btn-primary" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
-                      <td><a class="btn btn-success" style="color: white;"><b><i class="fa fa-check"></i></b></a></td>
-                      <td><a class="btn btn-danger" style="color: white;"><b><i class="fa fa-times"></i></b></a></td>
+                      <td><?= $i?>.</td>
+                      <td><?= $offer['offerTitle']?></td>
+                      <td><a href = "<?= base_url('backoffice/viewOfferDetails/'.$offer['offerID'])?>" target = "_blank" class="btn btn-primary" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
+                      <td><?php if($offer['approved'] == 0){?><a href = "<?= base_url('backoffice/approveOffer/'.$offer['offerID'])?>" class="btn btn-success approve" id = "approveOffer<?= $offer['offerID']?>" data = "<?= $offer['offerID']?>" style="color: white;"><b><i class="fa fa-check"></i></b></a><?php }else if($offer['approved'] == 1){ echo "<p style = 'color: green'>Approved</p>";}?></td>
+                      <td><?php if($offer['approved'] != 2){?><button class="btn btn-danger reject" id = "rejectOffer<?= $offer['offerID']?>" data = "<?= $offer['offerID']?>" style="color: white;"><b><i class="fa fa-times"></i></b></button><?php }else if($offer['approved'] == 2){ echo "<p style = 'color: red'>Rejected</p>";}?></td>
                   </tr>
-
+                <?php $i++;}?>
               </tbody>
           </table>
 
@@ -112,6 +113,26 @@
       <!-- /.container -->
     </footer>
 
+    <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Remarks</h4>
+      </div>
+      <div class="modal-body">
+          <label><b>Add Remark:</b></label>
+          <textarea class = "form-control other" name = "other" placeholder="Remark.."></textarea>
+        <div class="candidateData"></div><br>
+        <button  class = "form-control btn btn-primary addRemark">Add Remark</button>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
     <!-- Bootstrap core JavaScript -->
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -121,6 +142,54 @@
       $(document).ready(function() {
         $('#users').DataTable();
       } );
+    </script>
+    <script>
+
+    $(document).ready(function(){
+      $('body').on('click', '.reject', function(){
+        id = $(this).attr('id')
+        data = $('#'+id).attr('data')
+        $('.candidateData').html('<input type="hidden" class = "offerID" name = "offerData" value = "'+data+'">')
+        $('#myModal').modal({backdrop: 'static', keyboard: false})
+      })
+    })
+
+    $(document).ready(function(){
+      $('body').on('click', '.addRemark', function(){
+        data = $('.offerID').val()
+        remark = $('.other').val()
+        url = '<?=base_url('backoffice/rejectOffer/')?>'+data
+        postData = {
+          remark:remark
+        }
+        $.get(url,postData).done(function(res){
+          if(res == 'true'){
+            location.reload()
+          }else{
+            console.log(res)
+            location.reload()
+          }
+        })
+      })
+    })
+
+    $(document).ready(function(){
+      $('body').on('click', '.approve', function(){
+        id = $(this).attr('id')
+        data = $('#'+id).attr('data')
+        url = '<?=base_url('backoffice/approveOffer/')?>'+data
+        $.get(url).done(function(res){
+          if(res == 'true'){
+            location.reload()
+          }else{
+            console.log(res)
+            location.reload()
+          }
+        })
+      })
+    })
+
+
     </script>
 
   </body>
