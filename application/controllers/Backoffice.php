@@ -43,6 +43,13 @@ class Backoffice extends CI_Controller {
 		}
 	}
 
+	public function signout(){
+		$this->session->set_userdata('user_data', false);
+		$this->session->set_userdata('user_data', []);
+		$this->session->sess_destroy();
+		redirect(base_url('backoffice'));
+	}
+
 	public function users(){
 		$this->load->view('backoffice/users', $this->data);
 	}

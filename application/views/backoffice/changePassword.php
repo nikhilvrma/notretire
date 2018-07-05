@@ -65,12 +65,11 @@
         <!-- Content Column -->
         <div class="col-lg-9 mb-4">
 
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li class="breadcrumb-item active">About</li>
-          </ol>
+          <?php if($message['content']!=''){?>
+            <ol class="breadcrumb" style="background-color: white !important; margin-top: 20px; border: 1px solid <?=$message['color']?>;">
+              <li style="color: <?=$message['color']?>;"><?=$message['content']?></li>
+            </ol>
+          	<?php }?>
 
           <h4 class="mt-4 mb-3"><b>Change Password</b></h4>
 
