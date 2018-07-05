@@ -36,8 +36,8 @@
                 My Account
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="full-width.html">Change Password</a>
-                <a class="dropdown-item" href="sidebar.html">Sign Out</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/changePassword')?>">Change Password</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/signout')?>">Sign Out</a>
               </div>
             </li>
           </ul>

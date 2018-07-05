@@ -36,8 +36,8 @@
                 My Account
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="full-width.html">Change Password</a>
-                <a class="dropdown-item" href="sidebar.html">Sign Out</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/changePassword')?>">Change Password</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/signout')?>">Sign Out</a>
               </div>
             </li>
           </ul>
@@ -74,32 +74,33 @@
           <h4 class="mt-4 mb-3"><b>Change Password</b></h4>
 
 
-          <form>
+          <form action = "<?= base_url('backoffice/setNewPassword')?>" method = "POST">
 
             <div class="form-group row">
               <label for="currentPassword" class="col-sm-3 col-form-label">Current Password</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="currentPassword" placeholder="Current Password">
+                <input type="password" class="form-control" id="currentPassword" name = "currentPassword" placeholder="Current Password">
               </div>
             </div>
 
             <div class="form-group row">
               <label for="newPassword" class="col-sm-3 col-form-label">New Password</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="currentPassword" placeholder="New Password">
+                <input type="password" class="form-control" id="newPassword" name = "newPassword" placeholder="New Password">
               </div>
             </div>
 
             <div class="form-group row">
               <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                <input type="password" class="form-control" id="confirmPassword" name = "confirmPassword" placeholder="Confirm Password">
               </div>
             </div>
 
 
             <div class="form-group row">
               <div class="col-sm-12">
+                  <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
                 <button type="submit" class="btn btn-primary" style="float: right;">Change Password</button>
               </div>
             </div>

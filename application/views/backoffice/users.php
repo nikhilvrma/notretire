@@ -36,7 +36,7 @@
                 My Account
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="full-width.html">Change Password</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/changePassword')?>">Change Password</a>
                 <a class="dropdown-item" href="<?= base_url('backoffice/signout')?>">Sign Out</a>
               </div>
             </li>
@@ -58,8 +58,8 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item sidebar-item sidebar-active">Users</a>
-            <a href="about.html" class="list-group-item sidebar-item">Offers</a>
+            <a href="<?= base_url('backoffice/users')?>" class="list-group-item sidebar-item sidebar-active">Users</a>
+            <a href="<?= base_url('backoffice/offers')?>" class="list-group-item sidebar-item">Offers</a>
           </div>
         </div>
         <!-- Content Column -->
@@ -86,13 +86,15 @@
               </thead>
 
               <tbody>
+                <?php $i = 1; foreach($users as $user){?>
                   <tr>
-                      <td>1.</td>
-                      <td>Nikhil Verma</td>
-                      <td><b>E-Mail: </b>vrmanikhil@gmail.com<br><b>Mobile: </b>+91-7503705892</td>
-                      <td>General User</td>
-                      <td><a class="btn btn-primary" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
+                      <td><?= $i?></td>
+                      <td><?= $user['name']?></td>
+                      <td><b>E-Mail: </b><?= $user['email']?><br><b>Mobile: </b>+91-<?= $user['mobile']?></td>
+                      <td><?php if($user['accountType'] == 1){echo "General User";}else{echo "Employer";}?></td>
+                      <td><a href = "<?= base_url('backoffice/viewUserDetails/'.$user['userID'])?>" class="btn btn-primary" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
                   </tr>
+                <?php $i++;} ?>
 
               </tbody>
           </table>
