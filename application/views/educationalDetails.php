@@ -45,7 +45,7 @@
                 foreach($educations as $education){?>
               <div class="col-lg-12 mb-4">
               <div class="card">
-                <h6 class="card-header"><b><?php if($education['educationType'] == 1){echo "High School";}elseif($education['educationType'] == 2){echo "Senior Secondary";}elseif($education['educationType'] == 3){echo "Graduation";}else{echo "Post Post-Graduation";}?></b> <?php if
+                <h6 class="card-header"><b><?php if($education['educationType'] == 1){echo "High School";}elseif($education['educationType'] == 2){echo "Senior Secondary";}elseif($education['educationType'] == 3){echo "Graduation";}else{echo "Post-Graduation";}?></b> <?php if
                   ($education['status'] == 2){?><i class="fa fa-check-circle"></i><?php } ?></h6>
                 <div class="card-body">
                   <p class="card-text"><b>Year: </b><?= $education['year']?></p>

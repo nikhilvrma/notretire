@@ -729,8 +729,8 @@ class Functions extends CI_Controller {
 
 	public function deletePreferredLocation(){
 		$location = $this->input->get('location');
-		if($this->function_lib->isUserPreferredLocation($location, $_SESSION['user_data']['userID'])){
-			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','color'=>'red'));
+		if(!$this->function_lib->isUserPreferredLocation($location, $_SESSION['user_data']['userID'])){
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.1','color'=>'red'));
 			redirect(base_url('general-details'));
 		}
 		if($this->function_lib->deletePreferredLocation($location, $_SESSION['user_data']['userID'])){
