@@ -43,11 +43,8 @@
             <div class="row">
 
               <div class="col-lg-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <a href = "<?= base_url('profile/'.$userID)?>" class="btn btn-primary" id="sendMessageButton" target= "_blank"><i class="fa fa-download"></i> Download User Profile</a>
-                </div>
-              </div>
+                <a href = "<?= base_url('profile/'.$userID)?>" class="btn btn-primary btn-lg" id="sendMessageButton" target= "_blank" style="float:right;"><i class="fa fa-download"></i> Download User Profile</a>
+
               </div>
 
             </div>
