@@ -36,8 +36,8 @@
                 My Account
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="full-width.html">Change Password</a>
-                <a class="dropdown-item" href="sidebar.html">Sign Out</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/changePassword')?>">Change Password</a>
+                <a class="dropdown-item" href="<?= base_url('backoffice/signout')?>">Sign Out</a>
               </div>
             </li>
           </ul>
@@ -58,19 +58,18 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item sidebar-item sidebar-active">Users</a>
-            <a href="about.html" class="list-group-item sidebar-item">Offers</a>
+            <a href="<?= base_url('backoffice/users')?>" class="list-group-item sidebar-item sidebar-active">Users</a>
+            <a href="<?= base_url('backoffice/offers')?>" class="list-group-item sidebar-item">Offers</a>
           </div>
         </div>
         <!-- Content Column -->
         <div class="col-lg-9 mb-4">
 
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li class="breadcrumb-item active">About</li>
-          </ol>
+          <?php if($message['content']!=''){?>
+            <ol class="breadcrumb" style="background-color: white !important; margin-top: 20px; border: 1px solid <?=$message['color']?>;">
+              <li style="color: <?=$message['color']?>;"><?=$message['content']?></li>
+            </ol>
+          	<?php }?>
 
           <h4 class="mt-4 mb-3"><b>Users</b></h4>
 
@@ -87,13 +86,15 @@
               </thead>
 
               <tbody>
+                <?php $i = 1; foreach($users as $user){?>
                   <tr>
-                      <td>1.</td>
-                      <td>Nikhil Verma</td>
-                      <td><b>E-Mail: </b>vrmanikhil@gmail.com<br><b>Mobile: </b>+91-7503705892</td>
-                      <td>General User</td>
-                      <td><a class="btn btn-primary" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
+                      <td><?= $i?>.</td>
+                      <td><?= $user['name']?></td>
+                      <td><b>E-Mail: </b><?= $user['email']?><br><b>Mobile: </b>+91-<?= $user['mobile']?></td>
+                      <td><?php if($user['accountType'] == 1){echo "General User";}else{echo "Employer";}?></td>
+                      <td><?php if($user['accountType'] == 1){?><a href = "<?= base_url('backoffice/viewUserDetails/'.$user['userID'])?>" class="btn btn-primary" target = "_blank" style="color: white;"><b><i class="fa fa-eye"></i></b></a><?php }else{ echo "NA"; }?></td>
                   </tr>
+                <?php $i++;} ?>
 
               </tbody>
           </table>

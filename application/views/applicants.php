@@ -395,7 +395,7 @@
     $('body').on('change', '.remark', function(){
       data = $('.remark').val()
       console.log(data);
-      if(data == 4){
+      if(data == 3){
         $('.otherRemark').show();
       }else{
         $('.otherRemark').hide();
@@ -443,7 +443,8 @@
     $('body').on('click', '.addRemark', function(){
       data = $('.candidateID').val()
       value = $('.remark').val()
-      if(value == 4){
+      if(value == 3){
+        remark = $('.other').val()
       }else{
         remark = '';
       }
