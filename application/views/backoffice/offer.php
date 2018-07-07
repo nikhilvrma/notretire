@@ -140,7 +140,7 @@
 
                         <?php if($offerDetails[0]['approved'] == 0){?><a href = "<?= base_url('backoffice/approveOffer/'.$offerDetails[0]['offerID'])?>" class="btn btn-success" style="color: white;"><b><i class="fa fa-check"></i></b></a><?php }else if($offerDetails[0]['approved'] == 1){ echo "<p style = 'color: green'>Approved</p>";}?>
 
-                        <?php if($offerDetails[0]['approved'] != 2){?><button class="btn btn-danger reject" id = "rejectOffer<?= $offerDetails[0]['offerID']?>" data = "<?= $offerDetails[0]['offerID']?>" style="color: white;"><b><i class="fa fa-times"></i></b></button><?php }else if($offerDetails[0]['approved'] == 2){ echo "<p style = 'color: red'>Rejected</p>";}?>
+                        <?php if($offerDetails[0]['approved'] == 0){?><button class="btn btn-danger reject" id = "rejectOffer<?= $offerDetails[0]['offerID']?>" data = "<?= $offerDetails[0]['offerID']?>" style="color: white;"><b><i class="fa fa-times"></i></b></button><?php }else if($offerDetails[0]['approved'] == 2){ echo "<p style = 'color: red'>Rejected</p>";}?>
 
                     </div>
 
@@ -181,6 +181,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Remarks</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
           <label><b>Add Remark:</b></label>
