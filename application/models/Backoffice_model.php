@@ -48,12 +48,14 @@ class Backoffice_model extends CI_Model {
 
   public function getAllUsersData(){
     $this->db->select('userID, name, email, mobile, accountType');
+		$this->db->order_by('userID', 'DESC');
     $result = $this->db->get('users')->result_array();
     return $result;
   }
 
   public function getAllOffers(){
     $this->db->select('offerID, offerTitle, approved');
+		$this->db->order_by('offerID', 'DESC');
     $result = $this->db->get('offers')->result_array();
     return $result;
   }

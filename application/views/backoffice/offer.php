@@ -205,8 +205,11 @@
       $('body').on('click', '.reject', function(){
         id = $(this).attr('id')
         data = $('#'+id).attr('data')
-        $('.candidateData').html('<input type="hidden" class = "offerID" name = "offerData" value = "'+data+'">')
-        $('#myModal').modal({backdrop: 'static', keyboard: false})
+        var r = confirm("Click on 'OK' to Proceed with the rejection of the Offer.");
+        if (r == true) {
+          $('.candidateData').html('<input type="hidden" class = "offerID" name = "offerData" value = "'+data+'">')
+          $('#myModal').modal({backdrop: 'static', keyboard: false})
+        }
       })
     })
 

@@ -106,7 +106,7 @@ class Backoffice extends CI_Controller {
 			}
 		}
 		else{
-			$this->session->set_flashdata('message', array('content'=>'This Enter the correct Username to Proceed Ahead.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'Please Enter the correct Username to Proceed Ahead.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 	}
