@@ -138,7 +138,7 @@
                         <br>
                         <hr>
 
-                        <?php if($offerDetails[0]['approved'] == 0){?><a href = "<?= base_url('backoffice/approveOffer/'.$offerDetails[0]['offerID'])?>" class="btn btn-success" style="color: white;"><b><i class="fa fa-check"></i></b></a><?php }else if($offerDetails[0]['approved'] == 1){ echo "<p style = 'color: green'>Approved</p>";}?>
+                        <?php if($offerDetails[0]['approved'] == 0){?><button class="btn btn-success approve" id = "approveOffer<?= $offerDetails[0]['offerID']?>" data = "<?= $offerDetails[0]['offerID']?>" style="color: white;"><b><i class="fa fa-check"></i></b></button><?php }else if($offerDetails[0]['approved'] == 1){ echo "<p style = 'color: green'>Approved</p>";}?>
 
                         <?php if($offerDetails[0]['approved'] == 0){?><button class="btn btn-danger reject" id = "rejectOffer<?= $offerDetails[0]['offerID']?>" data = "<?= $offerDetails[0]['offerID']?>" style="color: white;"><b><i class="fa fa-times"></i></b></button><?php }else if($offerDetails[0]['approved'] == 2){ echo "<p style = 'color: red'>Rejected</p>";}?>
 
@@ -230,6 +230,25 @@
             console.log(res)
           }
         })
+      })
+    })
+
+    $(document).ready(function(){
+      $('body').on('click', '.approve', function(){
+        id = $(this).attr('id')
+        data = $('#'+id).attr('data')
+        url = '<?=base_url('backoffice/approveOffer/')?>'+data
+        var r = confirm("Click on 'OK' to Proceed with the acceptance of the Offer.");
+        if (r == true) {
+        $.get(url).done(function(res){
+          if(res == 'true'){
+            location.reload()
+          }else{
+            console.log(res)
+            location.reload()
+          }
+        })
+        }
       })
     })
     </script>

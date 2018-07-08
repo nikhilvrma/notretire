@@ -13,6 +13,7 @@ class Backoffice_lib {
 				'userID' => $userData[0]['userID'],
 				'username' => $username,
 				'name' => $userData[0]['name'],
+				'backoffice' => true
 				);
 			$CI->session->set_userdata('user_data', $data);
 			return 1;
@@ -31,7 +32,11 @@ class Backoffice_lib {
     $CI->load->library('session');
     $data = $CI->session->userdata('user_data');
     if (isset($data['loggedIn']) && $data['loggedIn']) {
-      return 1;
+			if(isset($data['backoffice']) && $data['backoffice']){
+      	return 1;
+			}else{
+				redirect(base_url());
+			}
     }
     return 0;
   }

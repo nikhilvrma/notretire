@@ -91,7 +91,7 @@
                       <td><?= $i?>.</td>
                       <td><?= $offer['offerTitle']?></td>
                       <td><a href = "<?= base_url('backoffice/viewOfferDetails/'.$offer['offerID'])?>" target = "_blank" class="btn btn-primary" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
-                      <td><?php if($offer['approved'] == 0){?><a href = "<?= base_url('backoffice/approveOffer/'.$offer['offerID'])?>" class="btn btn-success approve" id = "approveOffer<?= $offer['offerID']?>" data = "<?= $offer['offerID']?>" style="color: white;"><b><i class="fa fa-check"></i></b></a><?php }else if($offer['approved'] == 1){ echo "<p style = 'color: green'>Approved</p>";}?></td>
+                      <td><?php if($offer['approved'] == 0){?><button href = "<?= base_url('backoffice/approveOffer/'.$offer['offerID'])?>" class="btn btn-success approve" id = "approveOffer<?= $offer['offerID']?>" data = "<?= $offer['offerID']?>" style="color: white;"><b><i class="fa fa-check"></i></b></button><?php }else if($offer['approved'] == 1){ echo "<p style = 'color: green'>Approved</p>";}?></td>
                       <td><?php if($offer['approved'] == 0){?><button class="btn btn-danger reject" id = "rejectOffer<?= $offer['offerID']?>" data = "<?= $offer['offerID']?>" style="color: white;"><b><i class="fa fa-times"></i></b></button><?php }else if($offer['approved'] == 2){ echo "<p style = 'color: red'>Rejected</p>";}?></td>
                   </tr>
                 <?php $i++;}?>
@@ -182,6 +182,8 @@
         id = $(this).attr('id')
         data = $('#'+id).attr('data')
         url = '<?=base_url('backoffice/approveOffer/')?>'+data
+        var r = confirm("Click on 'OK' to Proceed with the acceptance of the Offer.");
+        if (r == true) {
         $.get(url).done(function(res){
           if(res == 'true'){
             location.reload()
@@ -190,6 +192,7 @@
             location.reload()
           }
         })
+        }
       })
     })
 
