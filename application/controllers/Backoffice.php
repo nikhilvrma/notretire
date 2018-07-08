@@ -21,7 +21,7 @@ class Backoffice extends CI_Controller {
 	}
 	public function users(){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['users'] = $this->backoffice_lib->getAllUsersData();
@@ -30,7 +30,7 @@ class Backoffice extends CI_Controller {
 
 	public function offers(){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['offers'] = $this->backoffice_lib->getAllOffers();
@@ -40,7 +40,7 @@ class Backoffice extends CI_Controller {
 
 	public function viewOfferDetails($offerID){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['offerDetails'] = $this->function_lib->getOfferDetails($offerID);
@@ -59,7 +59,7 @@ class Backoffice extends CI_Controller {
 
 	public function viewUserDetails($userID){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
@@ -71,7 +71,7 @@ class Backoffice extends CI_Controller {
 
 	public function changePassword(){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$this->load->view('backoffice/changePassword', $this->data);
@@ -120,7 +120,7 @@ class Backoffice extends CI_Controller {
 
 	public function setNewPassword(){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			redirect(base_url('backoffice'));
 		}
 		$currentPassword = '';
@@ -165,7 +165,7 @@ class Backoffice extends CI_Controller {
 
 	public function approveOffer($offerID){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			echo "false"; die;
 		}
 		if($this->backoffice_lib->approveOffer($offerID)){
@@ -179,7 +179,7 @@ class Backoffice extends CI_Controller {
 
 	public function rejectOffer($offerID){
 		if(!$this->backoffice_lib->auth()){
-			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Try Again.','color'=>'red'));
+			$this->session->set_flashdata('message', array('content'=>'It seems you have been logged out, Please Login to Continue.','color'=>'red'));
 			echo "false"; die;
 		}
 		$remark = $this->input->get('remark');
