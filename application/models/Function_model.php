@@ -267,7 +267,7 @@ class Function_model extends CI_Model {
 	}
 
 	public function getUserGeneralData($userID){
-		$this->db->select('users.userID, users.name, users.email, users.mobile, users.gender, users.cityID, indianCities.city, indianCities.state');
+		$this->db->select('users.userID, users.name, users.email, users.mobile, users.gender, users.cityID, indianCities.city, indianCities.state, users.accountType');
 		$this->db->join('indianCities', 'users.cityID = indianCities.cityID');
 		$result = $this->db->get_where('users', array('userID'=>$userID))->result_array();
 		return $result;

@@ -603,6 +603,9 @@ class Home extends CI_Controller {
 		}
 		$this->data['userOffer'] = $userOffer[0];
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
+		if($this->data['generalData']['accountType'] == 2){
+			redirect(base_url('404'));
+		}
 		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
 		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
 		$this->load->view('profile', $this->data);
@@ -613,6 +616,9 @@ class Home extends CI_Controller {
 			redirect(base_url('404'));
 		}
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
+		if($this->data['generalData']['accountType'] == 2){
+			redirect(base_url('404'));
+		}
 		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
 		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
 		$this->load->view('report', $this->data);

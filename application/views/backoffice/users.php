@@ -92,7 +92,7 @@
                       <td><?= $user['name']?></td>
                       <td><b>E-Mail: </b><?= $user['email']?><br><b>Mobile: </b>+91-<?= $user['mobile']?></td>
                       <td><?php if($user['accountType'] == 1){echo "General User";}else{echo "Employer";}?></td>
-                      <td><?php if($user['accountType'] == 1){?><a href = "<?= base_url('backoffice/viewUserDetails/'.$user['userID'])?>" class="btn btn-primary" target = "_blank" style="color: white;"><b><i class="fa fa-eye"></i></b></a><?php }else{ echo "NA"; }?></td>
+                      <td><a href = "<?= base_url('backoffice/viewUserDetails/'.$user['userID'])?>" class="btn btn-primary" target = "_blank" style="color: white;"><b><i class="fa fa-eye"></i></b></a></td>
                   </tr>
                 <?php $i++;} ?>
 

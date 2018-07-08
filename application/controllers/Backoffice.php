@@ -65,7 +65,10 @@ class Backoffice extends CI_Controller {
 		$this->data['generalData'] = $this->function_lib->getUserGeneralData($userID)[0];
 		$this->data['educationalDetails'] = $this->function_lib->getUserEducationalDetails($userID);
 		$this->data['workExperience'] = $this->function_lib->getUserWorkExperience($userID);
-		$this->load->view('report', $this->data);
+		if($this->data['generalData']['accountType'] == 2){
+			$this->data['companyData'] = $this->function_lib->getCompanyData($userID);
+		}
+		$this->load->view('backoffice/profile', $this->data);
 	}
 
 
